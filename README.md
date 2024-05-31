@@ -7,3 +7,8 @@ Rappel de l'architecture logicielle du projet :
 3. Habillage (Assemblage Formes + Matériaux)
 4. Assemblage des objets complexes.
 5. Paramètres d'environnement (lumière, caméra, etc.)
+
+comand liniux : povray main.pov main.ini
+
+main.pov = fichier scene
+main.ini = config image for 1920x108
