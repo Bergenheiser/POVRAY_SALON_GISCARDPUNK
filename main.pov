@@ -67,28 +67,66 @@ object {CapuchonRouge translate <0,2+82,0>}
     look_at <0,0,0>
     angle 66
 }*/
-#declare Text_cylinder = material { texture { T_Wood4 } }
 
 light_source{
-    <-2800,100,-500>
+    <-500,100,200>
     color White
 }
 //Position test
-camera{ right x * image_width/image_height
-    up y * 1
-    location <-100,100,-1000>
+camera{ 
+    right x * image_width/image_height
+    location <-300,15,100>
     look_at <0,0,0>
-    angle 75
+    angle 30
 }
 
 background{
     <0.2,0.2,1>
 }
 
+/*#declare ground = polygon{
+    10,
+    <-10,10>,<5,10>,<10,8>,<13,5>,<14,0>,<13,-5>,<10,-8>,<5,-10>,<-10,-10>,<-10,10>
+    texture {
+        finish{diffuse 0.6}
+        pigment{rgb<255,69,0>}
+    }
+}*/
+
+box{
+    <-1000,-1000,0>, <1000,1000,4000>
+    pigment{rgb<255,69,0>}
+}
+
+box{
+    <10,10,0>, <20,20,10>
+}
+
 cylinder {
-    <0, 1, 0>,     // Center of one end
-    <1, 2, 3>,     // Center of other end
-    0.5            // Radius
-  }
+    <0, 0, 0>, <10, 0, 0>, 0.1 // axe x
+    pigment{
+        Blue
+    }
+    
+}
+
+
+cylinder {
+    <0, 0, 0>, <0, 10, 0>, 0.1 // axe y
+    pigment{
+        Green
+    }
+    
+}
+
+
+cylinder {
+    <0, 0, 0>, <0, 0, 10>, 0.1 // axe z
+    pigment{
+        Red
+    }
+    
+}
+
 
 global_settings{ambient_light rgb <1,1,1>}
