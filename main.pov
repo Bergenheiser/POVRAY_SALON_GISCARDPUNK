@@ -3,6 +3,7 @@
 #include "woods.inc"
 
 
+
 //Modélisation géométrique (Création des formes élémentaires de nos structures complexes)
 
 /*#declare F_Room = box { <0,0,0> <7100,3000,14200>}
@@ -66,6 +67,7 @@ object {CapuchonRouge translate <0,2+82,0>}
     look_at <0,0,0>
     angle 66
 }*/
+#declare Text_cylinder = material { texture { T_Wood4 } }
 
 light_source{
     <-2800,100,-500>
@@ -82,5 +84,11 @@ camera{ right x * image_width/image_height
 background{
     <0.2,0.2,1>
 }
+
+cylinder {
+    <0, 1, 0>,     // Center of one end
+    <1, 2, 3>,     // Center of other end
+    0.5            // Radius
+  }
 
 global_settings{ambient_light rgb <1,1,1>}
