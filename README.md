@@ -11,4 +11,4 @@ Rappel de l'architecture logicielle du projet :
 comand liniux : povray main.pov main.ini
 
 main.pov = fichier scene
-main.ini = config image for 1920x108
+main.ini = config image for 3840x2160
