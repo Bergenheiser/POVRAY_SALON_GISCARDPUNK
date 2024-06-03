@@ -19,7 +19,21 @@
 
 #declare Box = difference
 {
-    object {B_out texture{pigment{rgb 1}}}
+    object 
+    {
+        B_out 
+        texture
+        {
+            pigment{rgb 1}
+            finish {
+                    ambient 0.2
+                    diffuse 0.9
+                    specular 0.6
+                    reflection 0.2
+                }
+        }
+        
+    }
     object {B_in texture{pigment {Orange}}}
 }
 
