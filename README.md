@@ -24,6 +24,17 @@ Les fenêtres
 
 Les murs du salon : un octogone centré sur l'origine, de largeur 800
 
+Liste des objets à modéliser:
+Table
+Meuble Kitch
+Cadre photo
+Fenetre
+Mur
+Chaise
+Tapis au sol
+Murs
+Lava Lamp by Graham Barth (importée) https://www.ms.uky.edu/~lee/visual05/gallery/gallery.html
+
 > > > > > > > Stashed changes
 
 Cahier des charges :
