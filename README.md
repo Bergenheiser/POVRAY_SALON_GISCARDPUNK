@@ -26,3 +26,19 @@ Les fenêtres
 
 Les murs du salon : un octogone centré sur l'origine, de largeur 800
 >>>>>>> Stashed changes
+
+Cahier des charges :
+- Environnement fermé
+- 2 types d'objets différents (formes, couleur)
+- Type de modélisation géométrique :
+    - Forme géométrique de base (sphere,box,cylinder,cone..)
+    - Forme à chemin (prism, lathe, sphere sweep)
+    - Un autre type de modèle (blob,isosurface,height_field, text)
+- 1 objet doit etre un assemblage (composants avec métériaux différents) 
+- 1 objet doit être transparent (min 50% de sa surface)
+- 1 objet doit être réfléchissant (avec reflet identifiable)
+- 1 objet doit être habillé avec une image externe identifiable 
+- 2 sources lumineuses minimum
+- La caméra doit utiliser un léger flou focal.
+
+L'importation d'objets de sources externes est autorisée dans la limite de 10% du nombre total d'objets uniques.
