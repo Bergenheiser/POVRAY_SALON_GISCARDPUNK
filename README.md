@@ -57,3 +57,5 @@ L'importation d'objets de sources externes est autorisée dans la limite de 10% 
 " You know you have been raytracing too long when ...
 ... You find yourself wishing you'd paid attention in math class to all those formulae you thought you'd never have any use for in real life.
 -- Jeff Lee "
+
+3.4.3.4 Sky Sphere
