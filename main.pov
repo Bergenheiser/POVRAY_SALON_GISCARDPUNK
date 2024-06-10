@@ -129,4 +129,7 @@ cylinder {
 }
 
 
-global_settings{ambient_light rgb <1,1,1>}
+global_settings{
+    ambient_light rgb <1,1,1>
+    assumed_gamma 2.0
+}
