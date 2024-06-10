@@ -25,14 +25,16 @@ Les fenêtres
 Les murs du salon : un octogone centré sur l'origine, de largeur 800
 
 Liste des objets à modéliser:
-Table
-Meuble Kitch
-Cadre photo
-Fenetre
-Mur
-Chaise
-Tapis au sol
-Murs
+Table (Dim)
+Meuble Kitch (Dim)
+Cadre photo (Dim)
+Fenetre (Max)
+Mur (Max)
+Chaise (Dim)
+Tapis au sol (Dim)
+Murs (Max)
+Texte à placer (Max)
+Skysphere (Max)
 Lava Lamp by Graham Barth (importée) https://www.ms.uky.edu/~lee/visual05/gallery/gallery.html
 
 > > > > > > > Stashed changes
@@ -43,12 +45,12 @@ Cahier des charges :
 - 2 types d'objets différents (formes, couleur)
 - Type de modélisation géométrique :
   - Forme géométrique de base (sphere,box,cylinder,cone..) -> La majorité des objets
-  - Forme à chemin (prism, lathe, sphere sweep) -> Les pieds de la table
+  - Forme à chemin (prism, lathe, sphere sweep) -> Les pieds de la de la table
   - Un autre type de modèle (blob, isosurface, height_field, text)
-- 1 objet doit etre un assemblage (composants avec métériaux différents)
-- 1 objet doit être transparent (min 50% de sa surface)
-- 1 objet doit être réfléchissant (avec reflet identifiable)
-- 1 objet doit être habillé avec une image externe identifiable
+- 1 objet doit etre un assemblage (composants avec matériaux différents)
+- 1 objet doit être transparent (min 50% de sa surface) -> Table (Dimitri)
+- 1 objet doit être réfléchissant (avec reflet identifiable) -> Table (Dimitri)
+- 1 objet doit être habillé avec une image externe identifiable -> Cadre photo (Dimitri)
 - 2 sources lumineuses minimum
 - La caméra doit utiliser un léger flou focal.
 

@@ -1,7 +1,6 @@
 #version 3.7;
 #include "shapes.inc"
 #include "colors.inc"
-#include "woods.inc"
 
 #declare B_out = Round_Box (
     <0,0,0>, <5,10,5>
