@@ -49,7 +49,7 @@
       conserve_energy
     }
   }
-  interior {ior 2.4 fade_distance 0.2 fade_power 1000 fade_color rgb<0,0.1,0.05>}
+  interior {ior 2.4 fade_distance 0.3 fade_power 1000 fade_color rgb<0,0.1,0.05>}
 }
 
 ////Habillage
@@ -110,5 +110,5 @@ light_source{
 
 }
 global_settings{
-  //radiosity{}
+  radiosity{}
 }

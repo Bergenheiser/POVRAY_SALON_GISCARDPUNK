@@ -37,6 +37,9 @@ Texte à placer (Max)
 Skysphere (Max)
 Lava Lamp by Graham Barth (importée) https://www.ms.uky.edu/~lee/visual05/gallery/gallery.html
 
+
+Faire scatter
+
 > > > > > > > Stashed changes
 
 Cahier des charges :

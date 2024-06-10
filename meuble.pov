@@ -15,7 +15,6 @@
     false
 )
 
-
 #declare Box = difference
 {
     object 
@@ -71,4 +70,7 @@ light_source{
     <-6,6,-6>
     rgb 1 
 }
-global_settings{ambient_light rgb <1,1,1>}
+global_settings{
+    ambient_light rgb <1,1,1>
+    assumed_gamma 2.0
+}
