@@ -39,7 +39,7 @@
 #declare M_Glass = material {
   texture{
     pigment {White*.99+Green*.01 filter 0.999}
-    normal {crackle .5 scale .04}
+    normal {bumps .1 scale .5}
     finish {
       diffuse 0
       ambient 0
