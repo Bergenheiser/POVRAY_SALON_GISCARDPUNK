@@ -113,7 +113,7 @@ On utilisera cette couche pour faire des fenetres dans notre piï¿½ce
 }
 
 object{
-    Mur_entier // Remplacer par mur avec fenetre une fois l'objet final crée
+    Mur // Remplacer par mur avec fenetre une fois l'objet final crée
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 19, 0>
     translate <-600,0,0>
@@ -121,7 +121,7 @@ object{
 }
 
 object{
-    Mur_entier
+    Mur
     scale <1,1,sqrt(8)> //Scale de Z
     rotate <0, 45, 0>
     translate <-500,0,300>
@@ -129,7 +129,7 @@ object{
 }
 
 object{
-    Mur_entier // Remplacer par mur avec fenetre une fois l'objet final crée
+    Mur // Remplacer par mur avec fenetre une fois l'objet final crée
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 71, 0>
     translate <-300,0,500>
@@ -137,7 +137,7 @@ object{
 }
 
 object{
-    Mur_entier
+    Mur
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 109, 0>
     translate <0,0,600>
@@ -145,7 +145,7 @@ object{
 }
 
 object{
-    Mur_entier // Remplacer par mur avec fenetre une fois l'objet final crée
+    Mur // Remplacer par mur avec fenetre une fois l'objet final crée
     scale <1,1,sqrt(8)>
     rotate <0, 135, 0>
     translate <300,0,500>
@@ -153,7 +153,7 @@ object{
 }
 
 object{
-    Mur_entier
+    Mur
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 161, 0>
     translate <500,0,300>
@@ -162,7 +162,7 @@ object{
 }
 // Modifier les dimention de ces 3 murs si on veut ajouter des fenetre dedans 
 object{
-    Mur_entier
+    Mur
     scale<1,1,8>
     translate<-600,0,-800>
     
@@ -170,7 +170,7 @@ object{
 }
 
 object{
-    Mur_entier
+    Mur
     scale<1,1,8>
     translate<600,0,-800>
     
@@ -178,7 +178,7 @@ object{
 }
 
 object{
-    Mur_entier
+    Mur
     scale<1,1,12>
     rotate<0,90,0>
     translate<-600,0,-800>
