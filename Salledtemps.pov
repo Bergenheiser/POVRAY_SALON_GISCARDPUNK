@@ -13,7 +13,7 @@ plane { y, 0
 }
 
 /* 
-Definition de la couche exterieur et intï¿½rieur du mur 
+Definition du mur 
 Epaisseur = 15 cm
 Longueur = 1m = 100 cm
 Hauteur = 4 m = 400 cm
@@ -25,14 +25,24 @@ pour les fenetres.
 }
 
 #declare F_Mur_avec_fenetre = box {
-    <-7.5,-200,-50>,<7.5,200,50> // Version du Mur centr�e sur (0,0,0) pour faire la fenetre
+    <-7.5,-200,-50>,<7.5,200,50> // Version du Mur centree sur (0,0,0) pour faire la fenetre
 }
+/* 
+Definition taille du trou fenetre // Out
+*/
 #declare F_Couche_Fenetre = Round_Box( 
     <-8,-40,-40>,
     <8,40,40>,
     0.3,
     false,
 )
+/*                                                                                                  
+Definition de la couche de verre pour les fenetres 
+Epaisseur = 3 cm
+Longueur = 80cm
+Hauteur = 80cm
+On utilisera cette couche pour faire des fenetres dans notre mur
+*/
 #declare F_Couche_verre = Round_Box( 
     <-1.5,0,0>,
     <1.5,79.5,79.5>, // Centrer comme les couches int/ext
@@ -69,21 +79,11 @@ material{
                 phong_size 400}
            }
 } 
-
-/* 
-Definition taille du trou fenetre // Out
-*/
     
     
     
 
-/*                                                                                                  
-Definition de la couche du milieu du mur 
-Epaisseur = 3 cm
-Longueur = 80cm
-Hauteur = 80cm
-On utilisera cette couche pour faire des fenetres dans notre piï¿½ce
-*/
+
 
 ///HABILLAGE////
 #declare Mur_Fenetre= object{
@@ -114,7 +114,7 @@ On utilisera cette couche pour faire des fenetres dans notre piï¿½ce
 }
 
 object{
-    Mur // Remplacer par mur avec fenetre une fois l'objet final crée
+    Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 19, 0>
     translate <-600,0,0>
@@ -130,7 +130,7 @@ object{
 }
 
 object{
-    Mur // Remplacer par mur avec fenetre une fois l'objet final crée
+    Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 71, 0>
     translate <-300,0,500>
@@ -146,7 +146,7 @@ object{
 }
 
 object{
-    Mur // Remplacer par mur avec fenetre une fois l'objet final crée
+    Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
     scale <1,1,sqrt(8)>
     rotate <0, 135, 0>
     translate <300,0,500>
@@ -189,7 +189,7 @@ object{
 
 
 #declare Window_Object = union{
-    object{Mur_Creuse translate<-7.5,200,20>}
+    object{Mur_Creuse translate<0,200,0>}
     object{Glass_window translate<-6,159.5,-19.5>}
 }
 
