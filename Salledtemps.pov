@@ -2,7 +2,6 @@
 #include "colors.inc"
 #include "shapes.inc"
 
-global_settings { assumed_gamma 2.0 }
 /* 
 Plan du sol avec vecteur normal Y P(x,z)
 Axe de roation pour les transofromation Y
@@ -29,12 +28,14 @@ pour les fenetres.
     <-7.5,-200,-50>,<7.5,200,50> // Version du Mur centr�e sur (0,0,0) pour faire la fenetre
 }
 #declare F_Couche_Fenetre = Round_Box( 
-    <-8,-40,-40,><8,40,40>,
+    <-8,-40,-40>,
+    <8,40,40>,
     0.3,
     false,
 )
 #declare F_Couche_verre = Round_Box( 
-    <-1.5,0,0>,<1.5,79.5,79.5>, // Centrer comme les couches int/ext
+    <-1.5,0,0>,
+    <1.5,79.5,79.5>, // Centrer comme les couches int/ext
     0.3,
     false,
 )   
@@ -45,7 +46,7 @@ pour les fenetres.
     texture
     {
      pigment{
-        White
+        rgb<0.5,0.5,0.5>
     }
     finish {
         ambient 1
@@ -212,4 +213,7 @@ light_source{
     rgb 1 
 }
 
-global_settings{ambient_light rgb <1,1,1>}  
+global_settings{
+ambient_light rgb <1,1,1>
+assumed_gamma 2.0 
+}  
