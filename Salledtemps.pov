@@ -112,6 +112,80 @@ On utilisera cette couche pour faire des fenetres dans notre piï¿½ce
     }
 }
 
+object{
+    Mur_entier // Remplacer par mur avec fenetre une fois l'objet final crée
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 19, 0>
+    translate <-600,0,0>
+    // Segment AI P(x,z) 
+}
+
+object{
+    Mur_entier
+    scale <1,1,sqrt(8)> //Scale de Z
+    rotate <0, 45, 0>
+    translate <-500,0,300>
+    // Segment IH P(x,z)  
+}
+
+object{
+    Mur_entier // Remplacer par mur avec fenetre une fois l'objet final crée
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 71, 0>
+    translate <-300,0,500>
+    // Segment HC P(x,z) 
+}
+
+object{
+    Mur_entier
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 109, 0>
+    translate <0,0,600>
+    // Segment CG P(x,z)  
+}
+
+object{
+    Mur_entier // Remplacer par mur avec fenetre une fois l'objet final crée
+    scale <1,1,sqrt(8)>
+    rotate <0, 135, 0>
+    translate <300,0,500>
+    // Segment GF P(x,z) 
+}
+
+object{
+    Mur_entier
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 161, 0>
+    translate <500,0,300>
+    
+    // Segment FB P(x,z) 
+}
+// Modifier les dimention de ces 3 murs si on veut ajouter des fenetre dedans 
+object{
+    Mur_entier
+    scale<1,1,8>
+    translate<-600,0,-800>
+    
+    // Segment EA P(x,z)
+}
+
+object{
+    Mur_entier
+    scale<1,1,8>
+    translate<600,0,-800>
+    
+    // Segment DB P(x,z)
+}
+
+object{
+    Mur_entier
+    scale<1,1,12>
+    rotate<0,90,0>
+    translate<-600,0,-800>
+    
+    // Segment ED P(x,z)
+}
+
 
 #declare Window_Object = union{
     object{Mur_Creuse translate<-7.5,200,20>}
