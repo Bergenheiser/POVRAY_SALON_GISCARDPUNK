@@ -14,7 +14,7 @@ plane { y, 0
 }
 
 /* 
-Definition de la couche exterieur et int�rieur du mur 
+Definition de la couche exterieur et intï¿½rieur du mur 
 Epaisseur = 15 cm
 Longueur = 1m = 100 cm
 Hauteur = 4 m = 400 cm
@@ -81,7 +81,7 @@ Definition de la couche du milieu du mur
 Epaisseur = 3 cm
 Longueur = 80cm
 Hauteur = 80cm
-On utilisera cette couche pour faire des fenetres dans notre pi�ce
+On utilisera cette couche pour faire des fenetres dans notre piï¿½ce
 */
 
 ///HABILLAGE////
@@ -124,7 +124,7 @@ object{Window_Object}
 Ajouter du verre (table.pov)
 Faire les fenetres (Round_Box voir meuble.pov)
 Box qui ferme en haut + en bas
-Skysphere + �clairement
+Skysphere + ï¿½clairement
 */
 
 camera { location <-100,200,-100>
@@ -136,6 +136,6 @@ camera { location <-100,200,-100>
 light_source{ 
     <-100,300,-100>
     rgb 1 
-}
+}*/
 
 global_settings{ambient_light rgb <1,1,1>}  
