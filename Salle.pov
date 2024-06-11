@@ -6,6 +6,11 @@
 Plan du sol avec vecteur normal Y P(x,z)
 Axe de roation pour les transofromation Y
 */
+/*plane { y, 0
+    pigment{
+        checker Red Black
+        }
+}*/
 
 /*
 Définition du sol + plafond 10 cm épaisseur on va faire une intersection avec les murs pour assembler le tout et avoir une continuité
@@ -19,11 +24,7 @@ Car pour le moments les plafond et sol sont plus grands que le contour des murs
 #declare F_Plafond = box {
     <-600,400,-800>,<600,410,600>,
 }
-plane { y, 0
-    pigment{
-        checker Red Black
-        }
-}
+
 
 /* 
 Definition du Mur Entier 
@@ -33,17 +34,15 @@ Hauteur = 4 m = 400 cm
 On texturera a la fin de l'assemblage des morceau en doublant cette couche et en ajoutant une couche de 1 cm de Verre au milieu 
 pour les fenetres.
 */
-#declare F_Mur_entier = box {
+#declare F_Mur = box {
     <-7.5,0,0>,<7.5,400,100> //Centrage de la partie de mur par rapport a x = 0 et suit l'axe Z
+    // Centre de gravité <0,200,50>
 }
-/* Version du Mur Entier centree sur (0,0,0) pour faire la fenetre */
-#declare F_Mur_avec_fenetre = box {
-    <-7.5,-200,-50>,<7.5,200,50> 
-}
+
 /* 
 Definition taille du trou fenetre // Out
 */
-#declare F_Couche_Fenetre = Round_Box( 
+#declare F_Creus = Round_Box( 
     <-8,-40,-40>,
     <8,40,40>,
     0.3,
@@ -100,11 +99,11 @@ material{
 
 ///HABILLAGE////
 #declare Mur_Fenetre= object{
-    F_Mur_avec_fenetre
+    F_Mur
     material{M_Mur}
 }
 #declare Mur = object{
-    F_Mur_entier
+    F_Mur
     material{M_Mur}
 }
 
@@ -122,7 +121,7 @@ material{
     }
     object
     {
-        F_Couche_Fenetre
+        F_Creus
     }
 }
 
@@ -214,6 +213,20 @@ Faire les fenetres (Round_Box voir meuble.pov)
 Box qui ferme en haut + en bas
 Skysphere + ï¿½clairement
 */
+
+sky_sphere {
+  pigment {
+    gradient y
+      color_map {
+        [0.0 color rgb <0.5,0.5,0.5>]
+        [0.7 color rgb <0.5,0.5,0.5>]
+        [1.0 color rgb <0.5,0.5,0.5>]
+        }
+    scale 13
+    translate<0,0,-100>
+    }
+  emission rgb <0.8,0.8,1>
+  } 
 
 camera { location <-100,200,-100>
         right x*image_width/image_height
