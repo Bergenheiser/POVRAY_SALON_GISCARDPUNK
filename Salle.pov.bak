@@ -217,24 +217,24 @@ Skysphere + ï¿½clairement
 */
 
 cylinder {  // Positive X-axis (red)
-  <0, 0, 0>  // Start point
-  <100, 0, 0>  // End point
-  1
-  pigment { rgb<1,0,0> }
+  0, 0, 0  // Start point
+  100, 0, 0  // End point
+  0.1 radius
+  pigment { color red }
 }
 
 cylinder {  // Positive Y-axis (green)
-  <0, 0, 0>
-  <0, 100, 0>
-  1
-  pigment {  rgb<0,1,0>  }
+  0, 0, 0
+  0, 100, 0
+  0.1 radius
+  pigment { color green }
 }
 
 cylinder {  // Positive Z-axis (blue)
-  <0, 0, 0>
-  <0, 0, 100>
-  1
-  pigment {  rgb<0,0,1> }
+  0, 0, 0
+  0, 0, 100
+  0.1 radius
+  pigment { color blue }
 }
 
 sky_sphere {
