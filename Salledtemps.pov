@@ -13,7 +13,7 @@ plane { y, 0
 }
 
 /* 
-Definition du mur 
+Definition du Mur Entier 
 Epaisseur = 15 cm
 Longueur = 1m = 100 cm
 Hauteur = 4 m = 400 cm
@@ -23,9 +23,9 @@ pour les fenetres.
 #declare F_Mur_entier = box {
     <-7.5,0,0>,<7.5,400,100> //Centrage de la partie de mur par rapport a x = 0 et suit l'axe Z
 }
-
+/* Version du Mur Entier centree sur (0,0,0) pour faire la fenetre */
 #declare F_Mur_avec_fenetre = box {
-    <-7.5,-200,-50>,<7.5,200,50> // Version du Mur centree sur (0,0,0) pour faire la fenetre
+    <-7.5,-200,-50>,<7.5,200,50> 
 }
 /* 
 Definition taille du trou fenetre // Out
