@@ -12,8 +12,51 @@ plane { y, 0
         checker Red Black
         }
 }
+
+/* 
+Definition de la couche exterieur et int�rieur du mur 
+Epaisseur = 15 cm
+Longueur = 1m = 100 cm
+Hauteur = 4 m = 400 cm
+On texturera a la fin de l'assemblage des morceau en doublant cette couche et en ajoutant une couche de 1 cm de Verre au milieu 
+pour les fenetres.
+*/
+#declare F_Mur_entier = box {
+    <-7.5,0,0>,<7.5,400,100> //Centrage de la partie de mur par rapport a x = 0 et suit l'axe Z
+}
+
+#declare F_Mur_avec_fenetre = box {
+    <-7.5,-200,-50>,<7.5,200,50> // Version du Mur centr�e sur (0,0,0) pour faire la fenetre
+}
+#declare F_Couche_Fenetre = Round_Box( 
+    <-8,-40,-40,><8,40,40>,
+    0.3,
+    false,
+)
+#declare F_Couche_verre = Round_Box( 
+    <-1.5,0,0>,<1.5,79.5,79.5>, // Centrer comme les couches int/ext
+    0.3,
+    false,
+)   
+
+///MATERIAUX
+
+#declare M_Mur = material{
+    texture
+    {
+     pigment{
+        White
+    }
+    finish {
+        ambient 1
+        emission  0
+        specular 1 roughness 1
+        reflection 1
+        }
+    }
+}
     
-#declare Window_Glass =
+#declare M_Window_Glass =
 material{    
     texture{
         pigment{ rgbf<0.98,0.98,0.98,0.8>}
@@ -27,46 +70,8 @@ material{
 } 
 
 /* 
-Definition de la couche exterieur et int�rieur du mur 
-Epaisseur = 15 cm
-Longueur = 1m = 100 cm
-Hauteur = 4 m = 400 cm
-On texturera a la fin de l'assemblage des morceau en doublant cette couche et en ajoutant une couche de 1 cm de Verre au milieu 
-pour les fenetres.
-*/
-#declare Mur_entier = box {
-    <-7.5,0,0>,<7.5,400,100> //Centrage de la partie de mur par rapport a x = 0 et suit l'axe Z
-    pigment{
-        Pink
-    }
-    finish {
-        ambient 1
-        emission  0
-        specular 1 roughness 1
-        reflection 1
-        }
-}
-
-#declare Mur_avec_fenetre = box {
-    <-7.5,-200,-50>,<7.5,200,50> // Version du Mur centr�e sur (0,0,0) pour faire la fenetre
-    pigment{
-        White
-    }
-    finish {
-        ambient 1
-        emission  0
-        specular 1 roughness 1
-        reflection 1
-        }
-}
-/* 
 Definition taille du trou fenetre // Out
 */
-#declare Couche_Fenetre = Round_Box( 
-    <-8,-40,-40,><8,40,40>,
-    0.6,
-    false,
-)
     
     
     
@@ -78,36 +83,42 @@ Longueur = 80cm
 Hauteur = 80cm
 On utilisera cette couche pour faire des fenetres dans notre pi�ce
 */
-#declare Couche_verre = Round_Box( 
-    <-1.5,0,0>,<1.5,79.5,79.5>, // Centrer comme les couches int/ext
-    0.6,
-    false,
-)    
 
-#declare Box = difference
+///HABILLAGE////
+#declare Mur_Fenetre= object{
+    F_Mur_avec_fenetre
+    material{M_Mur}
+}
+#declare Mur = object{
+    F_Mur_entier
+    material{M_Mur}
+}
+
+
+#declare Glass_window = object{ 
+    F_Couche_verre
+    material{M_Window_Glass}
+}
+
+#declare Mur_Creuse = difference
 {
     object
     {
-        Mur_avec_fenetre
+        Mur_Fenetre
     }
     object
     {
-        Couche_Fenetre
-        texture {pigment {Grey}
+        F_Couche_Fenetre
     }
 }
 
-#declare Glass_window = object {Couche_verre}
-    material{Window_Glass}
+
+#declare Window_Object = union{
+    object{Mur_Creuse translate<-7.5,200,20>}
+    object{Glass_window translate<-6,159.5,-19.5>}
 }
 
-object{
-    Box
-    translate<-7.5,200,20> 
-}
-
-object{Glass_window translate<-6,119.5,-19.5>}
-
+object{Window_Object}
 
 /*
 Ajouter du verre (table.pov)
@@ -116,14 +127,14 @@ Box qui ferme en haut + en bas
 Skysphere + �clairement
 */
 
-camera { location <-100,200,0>
+camera { location <-100,200,-100>
         right x*image_width/image_height
         look_at <0,200,100>
         
 }
 
 light_source{ 
-    <0,1000,0>
+    <-100,300,-100>
     rgb 1 
 }
 
