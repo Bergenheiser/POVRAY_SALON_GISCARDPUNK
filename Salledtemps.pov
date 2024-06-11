@@ -210,6 +210,6 @@ camera { location <-100,200,-100>
 light_source{ 
     <-100,300,-100>
     rgb 1 
-}*/
+}
 
 global_settings{ambient_light rgb <1,1,1>}  
