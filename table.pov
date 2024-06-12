@@ -72,7 +72,7 @@
   object {GT_LegPole translate <0, 9, 0> }
 } 
 
-#declare GlassTable = union {
+#declare GlassTable = union{
   object{GT_Top scale<0,0.2,0> translate<0,49,0>}
   object{GT_Leg translate<-7.5,0,-7.5>}
   object{GT_Leg translate<-7.5,0,7.5>}
@@ -107,8 +107,8 @@ light_source{
 light_source{
   <5,30,10>
   rgb 0.7
-
 }
+
 global_settings{
   radiosity{}
 }
