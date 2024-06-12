@@ -16,13 +16,23 @@ plane { y, 0
 Définition du sol + plafond 10 cm épaisseur on va faire une intersection avec les murs pour assembler le tout et avoir une continuité
 Car pour le moments les plafond et sol sont plus grands que le contour des murs
 */ 
-#declare F_Sol = box {
+/*#declare F_Sol = box {
     <-600,-10,-800>,<600,0,600>
+}*/
+
+
+/*#declare F_Plafond = box {
+    <-600,400,-800>,<600,410,600>
+}*/
+
+#declare F_Sol = polygon{
+    10, // E A I H C G F B D E
+    <-600,0,-800>,<-600,0,0>,<-500,0,300>,<-300,0,500>,<0,0,600>,<300,0,500>,<500,0,300>,<600,0,0>,<600,0,-800>,<-600,0,-800>
 }
 
-
-#declare F_Plafond = box {
-    <-600,400,-800>,<600,410,600>
+#declare F_Plafond = polygon{
+    10, // E A I H C G F B D E
+    <-600,400,-800>,<-600,400,0>,<-500,400,300>,<-300,400,500>,<0,400,600>,<300,400,500>,<500,400,300>,<600,400,0>,<600,400,-800>,<-600,400,-800>
 }
 
 
