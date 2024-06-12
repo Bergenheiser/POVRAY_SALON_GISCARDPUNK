@@ -249,7 +249,7 @@ cylinder {  // Positive Z-axis (blue)
   pigment {  rgb<0,0,1> }
 }
 
-/*sky_sphere {
+sky_sphere {
   pigment {
     gradient y
       color_map {
@@ -257,11 +257,11 @@ cylinder {  // Positive Z-axis (blue)
         [0.7 color rgb <0.5,0.5,0.5>]
         [1.0 color rgb <0.5,0.5,0.5>]
         }
-    scale 13
+    scale 1300
     translate<0,0,-100>
     }
   emission rgb <0.8,0.8,1>
-} */
+}
 
 camera { location <-1000,1000,100>
         right x*image_width/image_height
