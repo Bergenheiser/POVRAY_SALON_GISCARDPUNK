@@ -25,18 +25,16 @@ Les fenêtres
 Les murs du salon : un octogone centré sur l'origine, de largeur 800
 
 Liste des objets à modéliser:
-Table (Dim)
-Meuble Kitch (Dim)
-Cadre photo (Dim)
-Fenetre (Max)
-Mur (Max)
-Chaise (Dim)
-Tapis au sol (Dim)
-Murs (Max)
+Table (Dim) DONE
+Meuble Kitch (Dim) DONE
+Cadre photo (Dim) DONE
+Fenetre (Max) DONE
+Chaise (Dim) WIP
+Tapis au sol (Dim) WIP
+Murs (Max) DONE
 Texte à placer (Max)
 Skysphere (Max)
 Lava Lamp by Graham Barth (importée) https://www.ms.uky.edu/~lee/visual05/gallery/gallery.html
-
 
 Faire scatter
 
