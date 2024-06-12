@@ -6,11 +6,11 @@
 Plan du sol avec vecteur normal Y P(x,z)
 Axe de roation pour les transofromation Y
 */
-/*plane { y, 0
+plane { y, 0
     pigment{
         checker Red Black
         }
-}*/
+}
 
 /*
 Définition du sol + plafond 10 cm épaisseur on va faire une intersection avec les murs pour assembler le tout et avoir une continuité
@@ -42,22 +42,32 @@ pour les fenetres.
 /* 
 Definition taille du trou fenetre // Out
 */
-#declare F_Creus = Round_Box( 
-    <-8,-40,-40>,
-    <8,40,40>,
+#declare F_Creus = object{
+    Round_Box( 
+    <-9,132,10>,
+    <9,350,90>,
     0.3,
     false,
 )
+}
+
+/*#declare x0Creu = -9;
+#declare x1Creu = 9;
+#declare y0Creu = 132;
+#declare y1Creu = 300;
+#declare z0Creu = 10;
+#declare z1Creu = 90;*/
+
 /*                                                                                                  
 Definition de la couche de verre pour les fenetres 
 Epaisseur = 3 cm
 Longueur = 80cm
 Hauteur = 80cm
-On utilisera cette couche pour faire des fenetres dans notre mur
+On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
 */
 #declare F_Fenetre = Round_Box( 
-    <-1.5,0,0>,
-    <1.5,79.5,79.5>, // Centrer comme les couches int/ext
+    <-1.5,132,10>,
+    <1.5,350,90>, // Centrer comme les couches int/ext
     0.3,
     false,
 )   
@@ -84,7 +94,7 @@ material{
     texture{
         pigment{ rgbf<0.98,0.98,0.98,0.8>}
             finish { diffuse 0.1
-                reflection 0.2
+                reflection 0.01
                 specular 0.8
                 roughness 0.0003
                 phong 1
@@ -125,9 +135,18 @@ material{
     }
 }
 
-object {O_Mur_Creus}
+//// ASSEMBLAGE
+#declare Mur_Fenetre = union{
+    object{O_Mur_Creus}
+    object{O_Verre}
+}
 
-/*object{
+
+
+
+/////POSITIONNEMENT
+
+object{
     Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 19, 0>
@@ -136,7 +155,7 @@ object {O_Mur_Creus}
 }
 
 object{
-    Mur
+    O_Mur
     scale <1,1,sqrt(8)> //Scale de Z
     rotate <0, 45, 0>
     translate <-500,0,300>
@@ -152,7 +171,7 @@ object{
 }
 
 object{
-    Mur
+    O_Mur
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 109, 0>
     translate <0,0,600>
@@ -168,7 +187,7 @@ object{
 }
 
 object{
-    Mur
+    O_Mur
     scale <1,1,sqrt(10)> //Scale de Z
     rotate <0, 161, 0>
     translate <500,0,300>
@@ -177,7 +196,7 @@ object{
 }
 // Modifier les dimention de ces 3 murs si on veut ajouter des fenetre dedans 
 object{
-    Mur
+    O_Mur
     scale<1,1,8>
     translate<-600,0,-800>
     
@@ -185,7 +204,7 @@ object{
 }
 
 object{
-    Mur
+    O_Mur
     scale<1,1,8>
     translate<600,0,-800>
     
@@ -193,7 +212,7 @@ object{
 }
 
 object{
-    Mur
+    O_Mur
     scale<1,1,12>
     rotate<0,90,0>
     translate<-600,0,-800>
@@ -202,13 +221,6 @@ object{
 }
 
 
-#declare Window_Object = union{
-    object{Mur_Creuse translate<0,200,0>}
-    object{Glass_window translate<-6,159.5,-19.5>}
-}
-
-object{Window_Object}
-*/
 /*
 Ajouter du verre (table.pov)
 Faire les fenetres (Round_Box voir meuble.pov)
@@ -237,7 +249,7 @@ cylinder {  // Positive Z-axis (blue)
   pigment {  rgb<0,0,1> }
 }
 
-sky_sphere {
+/*sky_sphere {
   pigment {
     gradient y
       color_map {
@@ -249,11 +261,11 @@ sky_sphere {
     translate<0,0,-100>
     }
   emission rgb <0.8,0.8,1>
-} 
+} */
 
-camera { location <-20,200,100>
+camera { location <-1000,1000,100>
         right x*image_width/image_height
-        look_at <0,0,100>
+        look_at <0,200,100>
         
 }
 
