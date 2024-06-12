@@ -114,11 +114,11 @@ material{
 } 
     
 #declare M_Sol = material{
-    texture{pigment {Cherry_Wood}}
+    texture{T_Wood1}
 }
 
 #declare M_Plafond = material{
-    texture{pigment {Cherry_Wood}}
+    texture{T_Wood1}
 }
     
 
@@ -246,6 +246,15 @@ object{
     
     // Segment ED P(x,z)
 }
+
+object{
+    O_Sol
+}
+
+object{
+    O_Plafond
+}
+
 
 
 /*
