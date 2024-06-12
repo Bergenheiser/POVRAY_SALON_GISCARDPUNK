@@ -1,16 +1,17 @@
 #version 3.7;
 #include "colors.inc"
 #include "shapes.inc"
+#include "woods.inc"
 
 /* 
 Plan du sol avec vecteur normal Y P(x,z)
 Axe de roation pour les transofromation Y
 */
-plane { y, 0
+/*plane { y, 0
     pigment{
         checker Red Black
         }
-}
+}*/
 
 /*
 Définition du sol + plafond 10 cm épaisseur on va faire une intersection avec les murs pour assembler le tout et avoir une continuité
@@ -112,7 +113,13 @@ material{
            }
 } 
     
-    
+#declare M_Sol = material{
+    texture{pigment {Cherry_Wood}}
+}
+
+#declare M_Plafond = material{
+    texture{pigment {Cherry_Wood}}
+}
     
 
 
@@ -143,6 +150,16 @@ material{
     {
         F_Creus
     }
+}
+
+#declare O_Sol = object{
+    F_Sol
+    material{M_Sol}
+}
+
+#declare O_Plafond = object{
+    F_Plafond
+    material{M_Plafond}
 }
 
 //// ASSEMBLAGE
