@@ -1,13 +1,12 @@
 
 #version 3.7;
 #include "colors.inc"
-global_settings{assumed_gamma 1.0 radiosity{recursion_limit 1}}
+#include "textures.inc"
+global_settings{assumed_gamma 2.0 radiosity{recursion_limit 1}}
 background{White}  
 light_source{
-    -z*6 color White
-    area_light 1*x,1*z, 10,10 jitter adaptive 1 orient
-    rotate x*45
-    rotate -y*30
+<0,3,-6>
+rgb 0.9
 }
 
 camera
@@ -18,8 +17,6 @@ camera
   look_at   <0, 0.6,  0>
 }                                        
 
-#declare C_WoodChair=rgb<31,10,8>*1.4/255;
-#declare C_CanvasChair=color rgb <0.1,0.491,0.598>;
 #declare C_Nail=color Bronze;
 #declare T_NailChair=texture{
         pigment{C_Nail}
@@ -27,52 +24,26 @@ camera
 }           
 #declare T_WoodChair=texture{
         pigment{
-                wood
-                turbulence 0.1
-                color_map{
-                        [0 C_WoodChair*0.2]
-                        [0.11 C_WoodChair]
-                        [0.6 C_WoodChair*1.5]
-                        [1 C_WoodChair*0.4]
-                }
+               Tan_Wood
         }   
-        normal{bozo 0.01 scale 0.001}
-        finish{ambient 0.00 diffuse 0.9 specular 0.5 roughness 0.03}
-        rotate x*90
-        rotate x*10
-        rotate z*10
-        scale 0.02
-        translate 10
-}                                   
+        normal{brick 0.5 scale .1}
+        finish{ambient 0.00 diffuse 0.4 specular 0.2 roughness 0.4}
+}
+
 #declare T_CanvasChair=texture{
        pigment{ 
         image_map
         { 
             png "./assets/texture_coussin.png" map_type 0 interpolate 2 
         }
-
-        }
-        finish{ambient 0.00 diffuse 0.9 specular 0.5 roughness 0.03} 
-        normal{quilted 0.2 turbulence 0.1} //crackle
-        scale 0.1
-        }
-                              
-
-#declare T_CanvasPillow=texture{
-        pigment{
-                agate
-                color_map{
-                        [0 C_CanvasChair*0.2]
-                        [0.11 C_CanvasChair*0.6]
-                        [0.2 C_CanvasChair*1.5]
-                        [1 C_CanvasChair*0.4]
-                }
-        }                         
-        normal{quilted 1 turbulence 0.1 scale 0.1*<1,1,1>}
-        finish{ambient 0.001 diffuse 0.5 specular 0.04 roughness 0.1}
-        rotate y*45
         scale 0.5
-}                                   
+        }
+        normal{quilted 1 turbulence 0.01 scale 0.1*<1,1,1> rotate z*45}
+        finish{ambient 0.001 diffuse 0.5 specular 0.04 roughness 0.1}
+        scale 0.5
+}
+                              
+                                 
 #declare LegChair1=lathe{
 	cubic_spline
 	26,
@@ -191,7 +162,7 @@ camera
                         }
                 #end
                 #if (i=11 | i=23)
-                        object{RodBack rotate x*aEl translate posEl texture{T_WoodChair rotate z*100}}
+                        object{RodBack rotate x*aEl translate posEl texture{T_WoodChair}}
                 #end
                 #declare posEl=posEl+<0,yEl*cos(radians(aEl)),yEl*sin(radians(aEl))>;
                 #declare aEl=aEl+0.28;
@@ -214,8 +185,7 @@ camera
                 texture{T_CanvasChair}        
         }
 
-} 
-                                  
+}                           
 #declare xNailsPillow=union{
                 #declare i=0;
                 #while (i<7)
@@ -248,7 +218,7 @@ camera
         difference{
                 difference{superellipsoid{<0.4,0.4>} plane{y,0} scale <xChair*0.5,rLegChair*2.5,zChair*0.5>*1.02}
                 plane{y,0}
-                texture{T_CanvasPillow}
+                texture{T_CanvasChair rotate <0,45,-45>}
                 translate -y*0.01
         }
         
@@ -283,7 +253,7 @@ camera
                 object{RodChair1 scale <1,1,-1> translate <-xChair*0.5,0.1,zChair*0.5>}
                 object{RodChair2 translate <-xChair*0.5,0.3,-zChair*0.5>}
                 object{RodChair2 scale <1,1,-1> translate <-xChair*0.5,0.3,zChair*0.5>}
-                texture{T_WoodChair rotate x*90}
+                texture{T_WoodChair}
         }                
         union{
                 
@@ -291,11 +261,11 @@ camera
                 object{RodChair1 scale <zChair/xChair,1,1> rotate y*-90 translate <xChair*0.5,0.1,-xChair*0.5>}
                 object{RodChair2 scale <zChair/xChair,1,1> rotate y*-90 scale <-1,1,1> translate <-xChair*0.5,0.3,-zChair*0.5>}
                 object{RodChair2 scale <zChair/xChair,1,1> rotate y*-90 translate <xChair*0.5,0.3,-zChair*0.5>}
-                texture{T_WoodChair rotate z*90}
+                texture{T_WoodChair}
                 
         }
 }
-object{Chair rotate -y*50}
+object{Chair}
 plane{y,0 texture{pigment{White} finish{ambient 0 diffuse 0.7}}}
 
 
