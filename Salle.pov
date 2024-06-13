@@ -55,9 +55,9 @@ Definition taille du trou fenetre // Out
 */
 #declare F_Creus = object{
     Round_Box( 
-    <-9,132,10>,
-    <9,350,90>,
-    0.3,
+    <-9,132,15>,
+    <9,350,95>,
+    40,
     false,
 )
 }
@@ -76,12 +76,13 @@ Longueur = 80cm
 Hauteur = 80cm
 On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
 */
-#declare F_Fenetre = Round_Box( 
-    <-1.5,132,10>,
-    <1.5,350,90>, // Centrer comme les couches int/ext
-    0.3,
+#declare F_Fenetre = object{Round_Box( 
+    <-1.5,132,5>,
+    <1.5,350,95>, // Centrer comme les couches int/ext
+    2,
     false,
-)   
+)
+}   
 
 ///MATERIAUX
 
@@ -299,9 +300,9 @@ sky_sphere {
   emission rgb <0.8,0.8,1>
 }
 
-camera { location <-1000,1000,100>
+camera { location <0,300,-700>
         right x*image_width/image_height
-        look_at <0,200,100>
+        look_at <0,250,-600>
         
 }
 
