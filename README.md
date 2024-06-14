@@ -29,7 +29,7 @@ Table (Dim) DONE
 Meuble Kitch (Dim) DONE
 Cadre photo (Dim) DONE
 Fenetre (Max) DONE
-Chaise (Dim) WIP
+Chaise (Dim) DONE
 Tapis au sol (Dim) WIP
 Murs (Max) DONE
 Texte à placer (Max)

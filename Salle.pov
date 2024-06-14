@@ -83,7 +83,9 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
     false,
 )
 }   
-
+#declare F_Tapis = box{
+    <0,0,0>,<300,1,600>
+}
 ///MATERIAUX
 
 #declare M_Mur = material{
@@ -122,6 +124,26 @@ material{
     texture{T_Wood1}
 }
     
+#declare M_Tapis = material{
+    texture {
+        pigment{
+            image_map{
+                png "./assets/persian_rug.png" map_type 0
+            }
+        }
+        normal{ bumps 0.5 }
+        finish {
+            ambient 0.2
+            diffuse 0.8
+            reflection 0.1
+            specular 0.5
+            roughness 0.1
+            phong 1
+            phong_size 100
+        }
+    }
+    
+}
 
 
 
@@ -163,6 +185,12 @@ material{
     material{M_Plafond}
 }
 
+#declare O_Tapis = object{
+    F_Tapis
+    material{M_Tapis}
+}
+
+
 //// ASSEMBLAGE
 #declare Mur_Fenetre = union{
     object{O_Mur_Creus}
@@ -173,6 +201,8 @@ material{
 
 
 /////POSITIONNEMENT
+
+object{O_Tapis scale <600,1,300> translate<-800,1,-500>}
 
 object{
     Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
