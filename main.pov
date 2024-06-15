@@ -68,7 +68,24 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
     2,
     false,
 )
-} 
+}
+/* Passage en object pour éviter les erreurs de compilation à cause de la Macro Round_Box */
+#declare B_ext = object{Round_Box (
+    <0,0,0>, <5,10,5>,
+    0.4, 
+    false,
+)
+}
+
+#declare B_int = object{Round_Box(
+    <0.5,0.7,-1>,
+    <4.5,9.8,6>,
+    0.3,
+    false
+)
+}
+
+
 
 /*Matériaux (Textures)*/
 /*
@@ -88,7 +105,7 @@ Définition du matériau pour le mur
         }
     }
 }
- /*
+/*
 Définition du matériau pour le verre des vitres
 */   
 #declare M_Verre =
@@ -144,6 +161,8 @@ O_ POUR OBJET HABILLE
 }
 
 
+
+
 /* 
 Assemblage des objets pour la scène 
 */
@@ -159,6 +178,36 @@ Assemblage des objets pour la scène
     }
 }
 
+#declare Boite = difference
+{
+    object 
+    {
+        B_ext 
+        texture
+        {
+            pigment{rgb 1}
+            finish {
+                    ambient 0.2
+                    diffuse 0.9
+                    specular 0.6
+                    reflection 0.2
+                }
+        }
+        
+    }
+    object {B_int texture{pigment {Orange}}}
+}
+
+#declare Meuble = union {
+object{BoiteLarge scale 10}
+object{BoiteCarree translate<0,5.5,0> scale 10}
+object{Boite translate<-5,0,0> scale y*1.1 scale 10}
+object{BoiteLarge translate<-5,11,0> scale 10}
+object{Boite translate<8.5,0,0> scale 10}
+object{BoiteLarge translate<3.5,11,0> scale 10}
+}
+
+
 /*
 Mise en scène des objets dans la scène
 Paramètres globaux d'environnements
@@ -168,7 +217,101 @@ Plan du sol avec vecteur normal Y P(x,z)
 Axe de roation pour les transofromation Y
 */
 
+object{
+    Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 19, 0>
+    translate <-600,0,0>
+    // Segment AI P(x,z) 
+}
 
+object{
+    O_Mur
+    scale <1,1,sqrt(8)> //Scale de Z
+    rotate <0, 45, 0>
+    translate <-500,0,300>
+    // Segment IH P(x,z)  
+}
+
+object{
+    Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 71, 0>
+    translate <-300,0,500>
+    // Segment HC P(x,z) 
+}
+
+object{
+    O_Mur
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 109, 0>
+    translate <0,0,600>
+    // Segment CG P(x,z)  
+}
+
+object{
+    Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
+    scale <1,1,sqrt(8)>
+    rotate <0, 135, 0>
+    translate <300,0,500>
+    // Segment GF P(x,z) 
+}
+
+object{
+    O_Mur
+    scale <1,1,sqrt(10)> //Scale de Z
+    rotate <0, 161, 0>
+    translate <500,0,300>
+    
+    // Segment FB P(x,z) 
+}
+// Modifier les dimention de ces 3 murs si on veut ajouter des fenetre dedans 
+object{
+    O_Mur
+    scale<1,1,8>
+    translate<-600,0,-800>
+    
+    // Segment EA P(x,z)
+}
+
+object{
+    O_Mur
+    scale<1,1,8>
+    translate<600,0,-800>
+    
+    // Segment DB P(x,z)
+}
+
+object{
+    O_Mur
+    scale<1,1,12>
+    rotate<0,90,0>
+    translate<-600,0,-800>
+    
+    // Segment ED P(x,z)
+}
+
+object{
+    O_Sol
+}
+
+object{
+    O_Plafond
+}
+
+#declare BoiteCarree = object{
+    Boite 
+    scale<1.0, 0.5, 1.0> // <x, y, z>
+}
+
+#declare BoiteLarge = object {
+    Boite 
+    scale<1.7,0.5,1>
+}
+
+object{
+    Meuble
+}
 
 
 //Position réelle
@@ -184,9 +327,17 @@ Axe de roation pour les transofromation Y
 //Position test
 camera{ 
     right x * image_width/image_height
-    location <-300,15,100>
-    look_at <0,0,0>
-    angle 30
+    up y * 1
+    location <-300,200,-500>
+    look_at <0,200,0>
+    angle 75
+    
+}
+
+light_source {
+    <-400, 300, -600> // <x, y, z>
+    color <1.0, 1.0,  1.0> // <red, green, blue>
+    area_light <5, 0, 0>, <0, 0, 5>, 5, 5 // <x, y, z>, <x, y, z>, size 1, size 2    
 }
 
 
