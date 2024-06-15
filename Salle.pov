@@ -2,7 +2,6 @@
 #include "colors.inc"
 #include "shapes.inc"
 #include "woods.inc"
-#include "textures.inc"
 
 /* 
 Plan du sol avec vecteur normal Y P(x,z)
@@ -96,8 +95,10 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
         rgb<0.5,0.5,0.5>
     }
     finish {
+        ambient 1
         emission  0
-        specular 0.2 roughness 1
+        specular 1 roughness 1
+        reflection 1
         }
     }
 }
@@ -105,9 +106,10 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
 #declare M_Verre =
 material{    
     texture{
-        pigment{ rgb<0.98,0.98,0.98> filter 0.4}
+        pigment{ rgbf<0.98,0.98,0.98,0.8>}
             finish { diffuse 0.1
                 reflection 0.01
+                specular 0.8
                 roughness 0.0003
                 phong 1
                 phong_size 400}
@@ -158,7 +160,7 @@ material{
 
 #declare O_Verre = object{ 
     F_Fenetre
-    material{texture{Glass3}}
+    material{M_Verre}
 }
 
 #declare O_Mur_Creus = difference
@@ -200,7 +202,7 @@ material{
 
 /////POSITIONNEMENT
 
-//object{O_Tapis scale <600,1,300> translate<-800,1,-500>}
+object{O_Tapis scale <600,1,300> translate<-800,1,-500>}
 
 object{
     Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
@@ -314,21 +316,19 @@ cylinder {  // Positive Z-axis (blue)
   pigment {  rgb<0,0,1> }
 }
 
-////LUMIERES
-
-// sun ---------------------------------------------------------------------
-light_source{<1500,2500,-2500> rgb<255, 87, 51>}
-// sky ---------------------------------------------------------------------
-sky_sphere { pigment { gradient <0,1,0>
-                       color_map { [0.00 rgb <1.0,1.0,1.0>]
-                                   [0.30 rgb <0.0,0.1,1.0>]
-                                   [0.70 rgb <0.0,0.1,1.0>]
-                                   [1.00 rgb <1.0,1.0,1.0>] 
-                                 } 
-                       scale 100
-                     } // end of pigment
-           } //end of skysphere
-
+sky_sphere {
+  pigment {
+    gradient y
+      color_map {
+        [0.0 color rgb <0.5,0.5,0.5>]
+        [0.7 color rgb <0.5,0.5,0.5>]
+        [1.0 color rgb <0.5,0.5,0.5>]
+        }
+    scale 1300
+    translate<0,0,-100>
+    }
+  emission rgb <0.8,0.8,1>
+}
 
 camera { location <0,300,-700>
         right x*image_width/image_height
@@ -338,9 +338,9 @@ camera { location <0,300,-700>
 
 light_source{ 
     <-100,300,-100>
-    rgb 0.8
+    rgb 1 
 }
 
 global_settings{
-assumed_gamma 2.0 radiosity{}
+assumed_gamma 2.0 
 }  
