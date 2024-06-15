@@ -3,7 +3,7 @@
 #include "glass.inc"
 
 
-#declare F_Foot = lathe {
+#declare F_Pied_Table = lathe {
   cubic_spline
   9, 
   <1, 0>,   
@@ -24,11 +24,11 @@
   }
 }
 
-#declare F_T_LegPole = cylinder {
+#declare F_Poteau_Pied_Table = cylinder {
     <0, 0, 0>, <0, 40, 1>, 1 
 }
 
-#declare F_T_Top = cylinder {
+#declare F_Table = cylinder {
   <0,0,0>,
   <0,1,0>,
   15
@@ -36,7 +36,7 @@
 
 
 ////Matériaux
-#declare M_Glass = material {
+#declare M_Verre_Table = material {
   texture{
     pigment {White*.99+Green*.01 filter 0.999}
     normal {bumps .1 scale .5}
@@ -53,17 +53,17 @@
 }
 
 ////Habillage
-#declare GT_Top = object{
-  T_Top
-  material{M_Glass}
+#declare O_GT_Top = object{
+  F_Table
+  material{M_Verre_Table}
 }
-#declare GT_LegPole = object {
-  T_LegPole
-  material{M_Glass}
+#declare O_GT_LegPole = object {
+  F_Poteau_Pied_Table
+  material{M_Verre_Table}
 }
-#declare GT_Foot = object {
-  T_Foot
-  material{M_Glass}
+#declare O_GT_Foot = object {
+  F_Pied_Table
+  material{M_Verre_Table}
 }
 
 ///Assemblage
@@ -81,7 +81,6 @@
 }
 
 object{GlassTable}
-
 
 background{
     <0.2,0.2,1>
@@ -110,5 +109,5 @@ light_source{
 }
 
 global_settings{
-  radiosity{}
+  radiosity{} 
 }

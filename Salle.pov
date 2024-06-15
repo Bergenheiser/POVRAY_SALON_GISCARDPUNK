@@ -2,17 +2,19 @@
 #include "colors.inc"
 #include "shapes.inc"
 #include "woods.inc"
+#include "glass.inc"
+#include "textures.inc"
+
+
+////////FORMES ELEMENTAIRES/////////////////
+////////////////////////////////////////////
 
 /* 
-Plan du sol avec vecteur normal Y P(x,z)
-Axe de roation pour les transofromation Y
+Definition du Mur Entier 
+Epaisseur = 15 cm
+Longueur = 1m = 100 cm
+Hauteur = 4 m = 400 cm
 */
-/*plane { y, 0
-    pigment{
-        checker Red Black
-        }
-}*/
-
 
 #declare F_Sol = polygon{
     10, // E A I H C G F B D E
@@ -24,15 +26,6 @@ Axe de roation pour les transofromation Y
     <-600,400,-800>,<-600,400,0>,<-500,400,300>,<-300,400,500>,<0,400,600>,<300,400,500>,<500,400,300>,<600,400,0>,<600,400,-800>,<-600,400,-800>
 }
 
-
-/* 
-Definition du Mur Entier 
-Epaisseur = 15 cm
-Longueur = 1m = 100 cm
-Hauteur = 4 m = 400 cm
-On texturera a la fin de l'assemblage des morceau en doublant cette couche et en ajoutant une couche de 1 cm de Verre au milieu 
-pour les fenetres.
-*/
 #declare F_Mur = box {
     <-7.5,0,0>,<7.5,400,100> //Centrage de la partie de mur par rapport a x = 0 et suit l'axe Z
     // Centre de gravité <0,200,50>
@@ -43,39 +36,29 @@ Definition taille du trou fenetre // Out
 */
 #declare F_Creus = object{
     Round_Box( 
-    <-9,132,15>,
+    <-9,132,5>,
     <9,350,95>,
     40,
     false,
 )
 }
 
-/*#declare x0Creu = -9;
-#declare x1Creu = 9;
-#declare y0Creu = 132;
-#declare y1Creu = 300;
-#declare z0Creu = 10;
-#declare z1Creu = 90;*/
-
-/*                                                                                                  
-Definition de la couche de verre pour les fenetres 
-Epaisseur = 3 cm
-Longueur = 80cm
-Hauteur = 80cm
-On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
-*/
 #declare F_Fenetre = object{Round_Box( 
     <-1.5,132,5>,
     <1.5,350,95>, // Centrer comme les couches int/ext
     2,
     false,
 )
-}   
+}
+
 #declare F_Tapis = box{
     <0,0,0>,<1,1,1>
 }
 
-#declare F_T_Foot = lathe {
+
+//TABLE
+
+#declare F_Pied_Table = lathe {
   cubic_spline
   9, 
   <1, 0>,   
@@ -87,18 +70,39 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
   <2.5,8>,
   <1,9>,
   <1,11>
+  texture {
+    pigment { color rgb <1, 1, 1> }
+  }
+  finish {
+    ambient 0.1
+    diffuse 0.9
+  }
 }
 
-#declare F_T_LegPole = cylinder {
-    <0, 0, 0>, <0, 40, 1>, 1 
+#declare F_Poteau_Pied_Table = cylinder {
+    <0, 0, 0>, <0, 20, 1>, 1 
 }
 
-#declare F_T_Top = cylinder {
+#declare F_Table = cylinder {
   <0,0,0>,
   <0,1,0>,
   15
 }
-///MATERIAUX
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////MATERIAUX////////////////////////
+/////////////////////////////////////////////////
 
     
 #declare M_Verre =
@@ -148,18 +152,7 @@ material{
         }
     }
 }
-
-#declare M_T_Foot = material{
-    texture {
-    pigment { color rgb <1, 1, 1> }
-  }
-  finish {
-    ambient 0.1
-    diffuse 0.9
-  }
-}
-
-#declare M_T_Glass = material {
+#declare M_Verre_Table = material {
   texture{
     pigment {White*.99+Green*.01 filter 0.999}
     normal {bumps .1 scale .5}
@@ -176,11 +169,8 @@ material{
 }
 
 
-
-///HABILLAGE//// 
-
-
-//// O_ POUR OBJET HABILLE
+/////////////HABILLAGE///////////////////
+///////////////////////////////////////////
 
 #declare O_Mur = object{
     F_Mur
@@ -193,17 +183,6 @@ material{
     material{M_Verre}
 }
 
-#declare O_Mur_Creus = difference
-{
-    object
-    {
-        O_Mur
-    }
-    object
-    {
-        F_Creus
-    }
-}
 
 #declare O_Sol = object{
     F_Sol
@@ -219,42 +198,60 @@ material{
     F_Tapis
     material{M_Tapis}
 }
-// table
-#declare O_T_Top = object{
-  F_T_Top
-  material{M_T_Glass}
+
+//TABLE
+#declare O_GT_Top = object{
+  F_Table
+  material{M_Verre_Table}
 }
-#declare O_T_LegPole = object {
-  F_T_LegPole
-  material{M_T_Glass}
+#declare O_GT_LegPole = object {
+  F_Poteau_Pied_Table
+  material{M_Verre_Table}
 }
-#declare O_T_Foot = object {
-  F_T_Foot
-  material{M_T_Glass}
+#declare O_GT_Foot = object {
+  F_Pied_Table
+  material{M_Verre_Table}
 }
 
 
-//// ASSEMBLAGE
+////CSG ET TRANSFORMATIONS
+#declare O_Mur_Creus = difference
+{
+    object
+    {
+        O_Mur
+    }
+    object
+    {
+        F_Creus
+    }
+}
+
 #declare Mur_Fenetre = union{
     object{O_Mur_Creus}
     object{O_Verre}
 }
 
-#declare O_T_Leg = union {
-  object {O_T_Foot}
-  object {O_T_LegPole translate <0, 9, 0> }
+//TABLE
+#declare O_GT_Leg = union {
+  object {O_GT_Foot scale 0.5}
+  object {O_GT_LegPole translate <0, 4.5, 0> }
 } 
 
-#declare GlassTable = union{
-  object{O_T_Top scale<0,0.2,0> translate<0,49,0>}
-  object{O_T_Leg translate<-7.5,0,-7.5>}
-  object{O_T_Leg translate<-7.5,0,7.5>}
-  object{O_T_Leg translate <7.5,0,-7.5>}
-  object{O_T_Leg translate <7.5,0,7.5>}
+#declare TableVerre = union{
+  object{O_GT_Top scale<0,0.2,0> scale x*2 translate<0,24.5,0>}
+object{O_GT_Leg translate<-14,0,-14>}
+object{O_GT_Leg translate<-14,0,14>}
+object{O_GT_Leg translate <14,0,-14>}
+object{O_GT_Leg translate <14,0,14>}
 }
 
 
 /////POSITIONNEMENT
+
+object{TableVerre scale 5}
+
+object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
 
 object{
     Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
@@ -338,17 +335,26 @@ object{
     O_Plafond
 }
 
-object{GlassTable}
-
-object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
 
 
-/*
-Ajouter du verre (table.pov)
-Faire les fenetres (Round_Box voir meuble.pov)
-Box qui ferme en haut + en bas
-Skysphere + ï¿½clairement
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////PARAMETRES D'ENVIRONNEMENT////////////////
 
 cylinder {  // Positive X-axis (red)
   <0, 0, 0>  // Start point
