@@ -110,19 +110,19 @@ Definition taille du trou fenetre // Out
 // Panneau
 
 #declare line1 = text{
-    ttf "GapSans" "You know you have been raytracing too long when..." 1, 0
+    ttf "./assets/GapSans" "You know you have been raytracing too long when..." 1, 0
     translate<0,5.5,2.5>
     
      
 }
 
 #declare line2 = text{
-    ttf"GapSans" "...You find yourself wishing you'd paid attention in math class to all those formulae you thought you'd never have any use for in real life." 1,0
+    ttf"./assets/GapSans" "...You find yourself wishing you'd paid attention in math class to all those formulae you thought you'd never have any use for in real life." 1,0
     translate<0,4,2.5> 
 }
 
 #declare line3 = text{
-    ttf "GapSans" "-- Jeff Lee" 1,0
+    ttf "./assets/GapSans" "-- Jeff Lee" 1,0
     translate<0,2.5,2.5>
    
 }
