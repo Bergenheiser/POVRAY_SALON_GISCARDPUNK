@@ -76,29 +76,15 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
 }
 ///MATERIAUX
 
-#declare M_Mur = material{
-    texture
-    {
-     pigment{
-        rgb<0.5,0.5,0.5>
-    }
-    finish {
-        ambient 1
-        emission  0
-        specular 1 roughness 1
-        reflection 1
-        }
-    }
-}
     
 #declare M_Verre =
 material{    
     texture{
         pigment{ rgbf<0.98,0.98,0.98,0.8>}
-            finish { diffuse 0.1
-                reflection 0.01
-                specular 0.8
-                roughness 0.0003
+            finish { diffuse 0.7
+                reflection 0.2
+                specular 0.04
+                roughness 0.03
                 phong 1
                 phong_size 400}
            }
@@ -124,6 +110,21 @@ material{
     
 }
 
+#declare M_Papier_Peint = material{
+    texture{
+        pigment{
+           rgb<0.9,0.9,0.8>
+        }
+        normal{ brick 0.5}
+        finish{
+            specular 0.01
+            diffuse 0.7
+            reflection { 0.01, 0.04 }
+            roughness 0.05 //TEST GRADIENT DE REFLECTION
+        }
+    }
+}
+
 
 
 ///HABILLAGE//// 
@@ -133,7 +134,7 @@ material{
 
 #declare O_Mur = object{
     F_Mur
-    material{M_Mur}
+    material{M_Papier_Peint}
 }
 
 
@@ -297,22 +298,16 @@ cylinder {  // Positive Z-axis (blue)
 
 sky_sphere {
   pigment {
-    gradient y
-      color_map {
-        [0.0 color rgb <0.5,0.5,0.5>]
-        [0.7 color rgb <0.5,0.5,0.5>]
-        [1.0 color rgb <0.5,0.5,0.5>]
-        }
-    scale 1300
+    rgb<0.5,0.8,0.92>
+    scale 130
     translate<0,0,-100>
     }
-  emission rgb <0.8,0.8,1>
+    emission rgb <0.5,0.8,0.92>
 }
 
 camera {location <0,300,-700>
         right x*image_width/image_height
-        look_at <0,250,-600>
-        
+        look_at <0,250,-600>    
 }
 
 light_source{ 
