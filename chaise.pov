@@ -2,47 +2,7 @@
 #version 3.7;
 #include "colors.inc"
 #include "textures.inc"
-global_settings{assumed_gamma 2.0 radiosity{recursion_limit 1}}
-background{White}  
-light_source{
-<0,3,-6>
-rgb 0.9
-}
-
-camera
-{
-  location  <0, 2, -6>
-  direction 4*z
-  right     4*x/3
-  look_at   <0, 0.6,  0>
-}                                        
-
-#declare C_Nail=color Bronze;
-#declare T_NailChair=texture{
-        pigment{C_Nail}
-        finish{metallic brilliance 5 reflection 0.1 ambient 0.01 diffuse 0.5 specular 0.4 roughness 0.01}
-}           
-#declare T_WoodChair=texture{
-        pigment{
-               Tan_Wood
-        }   
-        normal{brick 0.5 scale .1}
-        finish{ambient 0.00 diffuse 0.4 specular 0.2 roughness 0.4}
-}
-
-#declare T_CanvasChair=texture{
-       pigment{ 
-        image_map
-        { 
-            png "./assets/texture_coussin.png" map_type 0 interpolate 2 
-        }
-        scale 0.5
-        }
-        normal{quilted 1 turbulence 0.01 scale 0.1*<1,1,1> rotate z*45}
-        finish{ambient 0.001 diffuse 0.5 specular 0.04 roughness 0.1}
-        scale 0.5
-}
-                              
+                  
                                  
 #declare LegChair1=lathe{
 	cubic_spline
@@ -80,6 +40,7 @@ camera
 #declare zChair=xChair;
 #declare RodChair1=cylinder{0,xChair*x,rLegChair}
 #declare RodChair2=cylinder{0,xChair*x,rLegChair}
+
 
 #declare RodChair1 = union{
         cylinder{0,x*xChair,rLegChair*0.3 translate y*0.03 translate z*0.01}
@@ -132,6 +93,42 @@ camera
         plane{z,0 inverse}
         scale <xChair*0.5,rLegChair,rLegChair*1>
 }
+
+
+
+
+
+
+
+
+//////////////////////////MATERIAUX////////////
+#declare C_Nail=color Bronze;
+#declare T_NailChair=texture{
+        pigment{C_Nail}
+        finish{metallic brilliance 5 reflection 0.1 ambient 0.01 diffuse 0.5 specular 0.4 roughness 0.01}
+}           
+#declare T_WoodChair=texture{
+        pigment{
+               Tan_Wood
+        }   
+        normal{brick 0.5 scale .1}
+        finish{ambient 0.00 diffuse 0.4 specular 0.2 roughness 0.4}
+}
+
+#declare T_CanvasChair=texture{
+       pigment{ 
+        image_map
+        { 
+            png "./assets/texture_coussin.png" map_type 0 interpolate 2 
+        }
+        scale 0.5
+        }
+        normal{quilted 1 turbulence 0.01 scale 0.1*<1,1,1> rotate z*45}
+        finish{ambient 0.001 diffuse 0.5 specular 0.04 roughness 0.1}
+        scale 0.5
+}
+
+//////////////////////////////////////////OBJETS////////////
 
 #declare nEl=25;
 #declare yEl=0.03;
@@ -265,7 +262,33 @@ camera
                 
         }
 }
-object{Chair}
-plane{y,0 texture{pigment{White} finish{ambient 0 diffuse 0.7}}}
 
+//////////////////////////////////
+///////PLACEMENT
+object{Chair}
+
+
+
+
+
+
+///////////////////////////////////////
+///LAISSER ICI//////////////
+
+plane{y,0 texture{pigment{White} finish{ambient 0 diffuse 0.7}}}
+global_settings{assumed_gamma 2.0 radiosity{recursion_limit 1}}
+background{White}  
+light_source{
+<0,3,-6>
+rgb 0.9
+}
+
+camera
+{
+  location  <0, 2, -6>
+  direction 4*z
+  right     4*x/3
+  look_at   <0, 0.6,  0>
+}                                        
+     
 

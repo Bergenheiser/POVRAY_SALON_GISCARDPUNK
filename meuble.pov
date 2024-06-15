@@ -1,6 +1,9 @@
 #version 3.7;
 #include "shapes.inc"
 #include "colors.inc"
+
+
+//////////////////////////////////////////
 #declare B_ext = Round_Box (
     <0,0,0>, <5,10,5>
     0.4, 
@@ -38,6 +41,9 @@
     Boite scale <1.7,0.5,1>
 }
 
+
+//////////////////////////////////////
+
 #declare Meuble = union {
 object{BoiteLarge scale 10}
 object{BoiteCarree translate<0,5.5,0> scale 10}
@@ -48,6 +54,13 @@ object{BoiteLarge translate<3.5,11,0> scale 10}
 }
 
 object{Meuble}
+
+
+///////////////////////////////////////
+
+///LAISSER ICI//////////////
+
+
 
 cylinder {  // Positive X-axis (red)
   <0, 0, 0>  // Start point
