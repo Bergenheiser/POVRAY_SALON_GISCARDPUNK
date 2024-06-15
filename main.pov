@@ -1,62 +1,174 @@
 #version 3.7;
 #include "colors.inc"
 #include "woods.inc"
+#include "shapes.inc"
+/**
+* \file main.pov
+* \brief Programme pour le projet d'Infographie 2 (Semestre 6)
+* \author GAILLARD Maxime && COPLEY Dimitri
+* \date 15/06/2024
+*/
 
+/* 
+Définition de l'espace 3D utilisé pour la modélisation
+Plan du sol avec vecteur normal Y P(x,z)
+Axe de roation pour les transofromation Y
+*/
 
+/*Modélisation géométrique (Création des formes élémentaires de nos structures complexes)*/
 
-//Modélisation géométrique (Création des formes élémentaires de nos structures complexes)
+/*
+Définition du sol et du plafond avec des polygones qui ferment la salle déssinée dans le plan
+*/
+#declare F_Sol = polygon{
+    10, // E A I H C G F B D E
+    <-600,0,-800>,<-600,0,0>,<-500,0,300>,<-300,0,500>,<0,0,600>,<300,0,500>,<500,0,300>,<600,0,0>,<600,0,-800>,<-600,0,-800>
+}
 
-/*#declare F_Room = box { <0,0,0> <7100,3000,14200>}
-#declare F_Bic_Capuchon = cylinder {
-    <0, 0, 0>, 
-    <0, 58, 0>, 
-    7
-    
-}*/
+#declare F_Plafond = polygon{
+    10, // E A I H C G F B D E
+    <-600,400,-800>,<-600,400,0>,<-500,400,300>,<-300,400,500>,<0,400,600>,<300,400,500>,<500,400,300>,<600,400,0>,<600,400,-800>,<-600,400,-800>
+}
 
+/* 
+Definition du Mur Entier 
+Epaisseur = 15 cm
+Longueur = 1m = 100 cm
+Hauteur = 4 m = 400 cm
+On texturera a la fin de l'assemblage des morceau en doublant cette couche et en ajoutant une couche de 1 cm de Verre au milieu 
+pour les fenetres.
+*/
+#declare F_Mur = box {
+    <-7.5,0,0>,<7.5,400,100> //Centrage de la partie de mur par rapport a x = 0 et suit l'axe Z
+    // Centre de gravité <0,200,50>
+}
 
-//Matériaux (Textures)
+/* 
+Definition taille du trou fenetre // Out
+*/
+#declare F_Creus = object{
+    Round_Box( 
+    <-9,132,15>,
+    <9,350,95>,
+    40,
+    false,
+)
+}
 
-//#declare M_TableTop = material{texture{T_Wood4}}
+/*                                                                                                  
+Definition de la couche de verre pour les fenetres 
+Epaisseur = 3 cm
+Longueur = 80cm
+Hauteur = 80cm
+On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
+*/
+#declare F_Fenetre = object{Round_Box( 
+    <-1.5,132,5>,
+    <1.5,350,95>, // Centrer comme les couches int/ext
+    2,
+    false,
+)
+} 
 
-/*#declare Glass = material
-{ 
-    texture {
-    pigment { rgbt <0.9, 0.9, 0.9> filter 0.95}
+/*Matériaux (Textures)*/
+/*
+Définition du matériau pour le mur
+*/
+#declare M_Mur = material{
+    texture
+    {
+     pigment{
+        rgb<0.5,0.5,0.5>
+    }
     finish {
-        ambient 0.2
-        diffuse 0.1
-        specular 0.9
-        reflection { 0.1, 1.0 fresnel on }
+        ambient 1
+        emission  0
+        specular 1 roughness 1
+        reflection 1
         }
     }
-    interior{ ior 1.5 }
-}*/
+}
+ /*
+Définition du matériau pour le verre des vitres
+*/   
+#declare M_Verre =
+material{    
+    texture{
+        pigment{ rgbf<0.98,0.98,0.98,0.8>}
+            finish { diffuse 0.1
+                reflection 0.01
+                specular 0.8
+                roughness 0.0003
+                phong 1
+                phong_size 400}
+           }
+} 
+/*
+Définition du matériau pour le sol
+*/    
+#declare M_Sol = material{
+    texture{T_Wood1}
+}
+/*
+Définition du matériau pour le plafond
+*/
+#declare M_Plafond = material{
+    texture{T_Wood1}
+}
 
-//Habillage (Formes+Matériaux)
-/*#declare CorpsBlanc= object {
-    F_Bic_Corps
-    material{M_PlastiqueBlanc}
-}*/
+
+/*
+Habillage (Formes + matéiraux) = Object
+O_ POUR OBJET HABILLE
+*/
+#declare O_Mur = object{
+    F_Mur
+    material{M_Mur}
+}
 
 
-///////////////////////
-//////Assemblage///////
-///////////////////////
-//union=groupe vs. merge=union ensembliste
-/*#declare BicRouge = union
+#declare O_Verre = object{ 
+    F_Fenetre
+    material{M_Verre}
+}
+
+
+#declare O_Sol = object{
+    F_Sol
+    material{M_Sol}
+}
+
+#declare O_Plafond = object{
+    F_Plafond
+    material{M_Plafond}
+}
+
+
+/* 
+Assemblage des objets pour la scène 
+*/
+#declare O_Mur_Creus = difference
 {
-object {PastilleRouge}
-object {CorpsBlanc translate <0, 2, 0> }
-object {CapuchonRouge translate <0,2+82,0>}
-}*/
+    object
+    {
+        O_Mur
+    }
+    object
+    {
+        F_Creus
+    }
+}
+
+/*
+Mise en scène des objets dans la scène
+Paramètres globaux d'environnements
+
+Rappel du plan :
+Plan du sol avec vecteur normal Y P(x,z)
+Axe de roation pour les transofromation Y
+*/
 
 
-/////////////////////////////////////////////////////////:
-//Mise en scène et paramètres globaux d'environnements (disposition du catalogue d'objets composites, caméra, lumières)
-///////////////////////////
-///Generalement on fait toute les transformations d'orientation avant les translate. 
-//object{Room translate <-3400,-750,-14100> }
 
 
 //Position réelle
@@ -68,10 +180,7 @@ object {CapuchonRouge translate <0,2+82,0>}
     angle 66
 }*/
 
-light_source{
-    <-500,100,200>
-    color White
-}
+
 //Position test
 camera{ 
     right x * image_width/image_height
@@ -80,53 +189,10 @@ camera{
     angle 30
 }
 
-background{
-    <0.2,0.2,1>
-}
-
-/*#declare ground = polygon{
-    10,
-    <-10,10>,<5,10>,<10,8>,<13,5>,<14,0>,<13,-5>,<10,-8>,<5,-10>,<-10,-10>,<-10,10>
-    texture {
-        finish{diffuse 0.6}
-        pigment{rgb<255,69,0>}
-    }
-}*/
-
-box{
-    <-1000,-1000,0>, <1000,1000,4000>
-    pigment{rgb<255,69,0>}
-}
-
-box{
-    <10,10,0>, <20,20,10>
-}
-
-cylinder {
-    <0, 0, 0>, <10, 0, 0>, 0.1 // axe x
-    pigment{
-        Blue
-    }
-    
-}
 
 
-cylinder {
-    <0, 0, 0>, <0, 10, 0>, 0.1 // axe y
-    pigment{
-        Green
-    }
-    
-}
 
 
-cylinder {
-    <0, 0, 0>, <0, 0, 10>, 0.1 // axe z
-    pigment{
-        Red
-    }
-    
-}
 
 global_settings{
     ambient_light rgb <1,1,1>
