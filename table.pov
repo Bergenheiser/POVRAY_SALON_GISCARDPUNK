@@ -3,7 +3,7 @@
 #include "glass.inc"
 
 
-#declare T_Foot = lathe {
+#declare F_Foot = lathe {
   cubic_spline
   9, 
   <1, 0>,   
@@ -24,11 +24,11 @@
   }
 }
 
-#declare T_LegPole = cylinder {
+#declare F_T_LegPole = cylinder {
     <0, 0, 0>, <0, 40, 1>, 1 
 }
 
-#declare T_Top = cylinder {
+#declare F_T_Top = cylinder {
   <0,0,0>,
   <0,1,0>,
   15

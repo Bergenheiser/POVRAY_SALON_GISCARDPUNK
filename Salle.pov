@@ -74,6 +74,30 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
 #declare F_Tapis = box{
     <0,0,0>,<1,1,1>
 }
+
+#declare F_T_Foot = lathe {
+  cubic_spline
+  9, 
+  <1, 0>,   
+  <1, 3>,   
+  <1.5, 4>,   
+  <1, 5>, 
+  <2, 6>,   
+  <1, 7>,
+  <2.5,8>,
+  <1,9>,
+  <1,11>
+}
+
+#declare F_T_LegPole = cylinder {
+    <0, 0, 0>, <0, 40, 1>, 1 
+}
+
+#declare F_T_Top = cylinder {
+  <0,0,0>,
+  <0,1,0>,
+  15
+}
 ///MATERIAUX
 
     
@@ -125,6 +149,32 @@ material{
     }
 }
 
+#declare M_T_Foot = material{
+    texture {
+    pigment { color rgb <1, 1, 1> }
+  }
+  finish {
+    ambient 0.1
+    diffuse 0.9
+  }
+}
+
+#declare M_T_Glass = material {
+  texture{
+    pigment {White*.99+Green*.01 filter 0.999}
+    normal {bumps .1 scale .5}
+    finish {
+      diffuse 0
+      ambient 0
+      specular 0.01
+      roughness 0.005
+      reflection {0.04, .9 fresnel}
+      conserve_energy
+    }
+  }
+  interior {ior 2.4 fade_distance 0.3 fade_power 1000 fade_color rgb<0,0.1,0.05>}
+}
+
 
 
 ///HABILLAGE//// 
@@ -169,6 +219,19 @@ material{
     F_Tapis
     material{M_Tapis}
 }
+// table
+#declare O_T_Top = object{
+  F_T_Top
+  material{M_T_Glass}
+}
+#declare O_T_LegPole = object {
+  F_T_LegPole
+  material{M_T_Glass}
+}
+#declare O_T_Foot = object {
+  F_T_Foot
+  material{M_T_Glass}
+}
 
 
 //// ASSEMBLAGE
@@ -177,12 +240,21 @@ material{
     object{O_Verre}
 }
 
+#declare O_T_Leg = union {
+  object {O_T_Foot}
+  object {O_T_LegPole translate <0, 9, 0> }
+} 
 
+#declare GlassTable = union{
+  object{O_T_Top scale<0,0.2,0> translate<0,49,0>}
+  object{O_T_Leg translate<-7.5,0,-7.5>}
+  object{O_T_Leg translate<-7.5,0,7.5>}
+  object{O_T_Leg translate <7.5,0,-7.5>}
+  object{O_T_Leg translate <7.5,0,7.5>}
+}
 
 
 /////POSITIONNEMENT
-
-object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
 
 object{
     Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
@@ -266,6 +338,9 @@ object{
     O_Plafond
 }
 
+object{GlassTable}
+
+object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
 
 
 /*
