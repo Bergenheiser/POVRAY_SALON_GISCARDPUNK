@@ -36,7 +36,13 @@ Texte à placer (Max)
 Skysphere (Max)
 Lava Lamp by Graham Barth (importée) https://www.ms.uky.edu/~lee/visual05/gallery/gallery.html
 
-Faire scatter
+Faire scatter ! RETROUVE LE CODE CONNARD
+Enlever reflection plafond
+Lumùière sur lava lamp,
+Poser meuble
+Réparer la plaque texte
+Importer cadre
+Importer chaise
 
 > > > > > > > Stashed changes
 
