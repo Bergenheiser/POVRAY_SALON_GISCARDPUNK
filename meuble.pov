@@ -4,23 +4,22 @@
 
 
 //////////////////////////////////////////
-#declare B_ext = Round_Box (
+#declare F_Ext_Meuble = Round_Box (
     <0,0,0>, <5,10,5>
     0.4, 
     false,
 )
-#declare B_int = Round_Box(
+#declare F_Int_Meuble = Round_Box(
     <0.5,0.7,-1>,
     <4.5,9.8,6>,
     0.3,
     false
 )
-#declare Boite = difference
-{
-    object 
-    {
-        B_ext 
-        texture
+
+//////////MATERIAUX
+
+#declare M_Ext_Meuble = material
+{texture
         {
             pigment{rgb 1}
             finish {
@@ -30,10 +29,40 @@
                     reflection 0.2
                 }
         }
+}
+
+#declare M_Int_Meuble = material{texture{pigment {Orange}}}
+
+///////////HABILLLAGE
+
+
+#declare O_Int_Meuble = object{
+    F_Int_Meuble
+    material{M_Int_Meuble}
+}
+
+#declare O_Ext_Meuble = object{
+    F_Ext_Meuble
+    material{M_Ext_Meuble}
+}
+
+
+////////////////ASSEMBLAGE
+
+#declare Boite = difference
+{
+    object 
+    {
+        B_ext 
         
     }
-    object {B_int texture{pigment {Orange}}}
+    object {B_int}
 }
+
+
+
+
+////////////TRANSFORMATIONS
 #declare BoiteCarree = object{
     Boite scale <1.0, 0.5, 1.0> // <x, y, z>
 }
@@ -42,8 +71,7 @@
 }
 
 
-//////////////////////////////////////
-
+//////////POSITIONNNEMENT
 #declare Meuble = union {
 object{BoiteLarge scale 10}
 object{BoiteCarree translate<0,5.5,0> scale 10}
