@@ -41,16 +41,16 @@ Definition taille du trou fenetre // Out
 */
 #declare F_Creus = object{
     Round_Box( 
-    <-9,132,5>,
-    <9,350,95>,
+    <-9,132,10>,
+    <9,350,90>,
     40,
     false,
 )
 }
 
 #declare F_Fenetre = object{Round_Box( 
-    <-1.5,132,5>,
-    <1.5,350,95>, // Centrer comme les couches int/ext
+    <-1.5,130,2>,
+    <1.5,352,98>, // Centrer comme les couches int/ext
     2,
     false,
 )
@@ -148,24 +148,22 @@ Definition taille du trou fenetre // Out
 #declare M_Verre =
 material{    
     texture{
-        pigment{ color transmit 1.0}
+        pigment{ color transmit 0.9}
             finish { 
-                diffuse 0.7
-                reflection 0.2
+                reflection 0.01
                 specular 0.04
                 roughness 0.03
-                phong 1
-                phong_size 400}        
+                phong 0.75
+                phong_size 150}        
    }
+   interior{ior 1.4}
 } 
     
 #declare M_Sol = material{
     texture{T_Wood1}
+    scale 10
 }
 
-#declare M_Plafond = material{
-    texture{T_Wood1}
-}
     
 #declare M_Tapis = material{
     texture {
@@ -187,12 +185,13 @@ material{
         normal{ brick 0.5}
         finish{
             specular 0.01
-            diffuse 0.7
+            diffuse 0.4
             reflection { 0.01, 0.04 }
             roughness 0.05 //TEST GRADIENT DE REFLECTION
         }
     }
 }
+
 #declare M_Verre_Table = material {
   texture{
     pigment {White*.99+Green*.01 filter 0.999}
@@ -232,7 +231,7 @@ material{
 
 #declare O_Plafond = object{
     F_Plafond
-    material{M_Plafond}
+    material{M_Papier_Peint}
 }
 
 #declare O_Tapis = object{
@@ -420,7 +419,7 @@ object{
 
 object{F_Scatter_Box translate <-300,250,500>}
 
-object{Lava_Lamp scale 4 rotate x*-90 translate<0,80,0>}
+object{Lava_Lamp scale 4 rotate x*-90 translate<0,120,0>}
 
 
 
@@ -435,7 +434,7 @@ sky_sphere {
     scale 130
     translate<0,0,-100>
     }
-    emission rgb <0.5,0.8,0.92>
+    emission rgb <0.5,0.8,0.95> 
 }
 
 camera { 
@@ -463,10 +462,10 @@ light_source {
     radius 75
     adaptive 1
     jitter
-    point_at <0, 80, 0>
+    point_at <0, -80, 0>
 } //POSITION VALIDEE
 
-//light_source { <0, 390, 0>, 0.5 media_interaction off }
+light_source { <0, 125, 0>, 0.5 media_interaction off }
 
 // CALCULER COORDS AUTRES LUMIERE
 /*light_source {
