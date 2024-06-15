@@ -84,7 +84,7 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
 )
 }   
 #declare F_Tapis = box{
-    <0,0,0>,<300,1,600>
+    <0,0,0>,<1,1,1>
 }
 ///MATERIAUX
 
@@ -128,19 +128,10 @@ material{
     texture {
         pigment{
             image_map{
-                png "./assets/persian_rug.png" map_type 0
+                png "./assets/persian_rug.png" map_type 0 interpolate 2
             }
         }
         normal{ bumps 0.5 }
-        finish {
-            ambient 0.2
-            diffuse 0.8
-            reflection 0.1
-            specular 0.5
-            roughness 0.1
-            phong 1
-            phong_size 100
-        }
     }
     
 }
@@ -202,7 +193,7 @@ material{
 
 /////POSITIONNEMENT
 
-object{O_Tapis scale <600,1,300> translate<-800,1,-500>}
+object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
 
 object{
     Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
@@ -330,7 +321,7 @@ sky_sphere {
   emission rgb <0.8,0.8,1>
 }
 
-camera { location <0,300,-700>
+camera {location <0,300,-700>
         right x*image_width/image_height
         look_at <0,250,-600>
         
@@ -338,7 +329,7 @@ camera { location <0,300,-700>
 
 light_source{ 
     <-100,300,-100>
-    rgb 1 
+    rgb 0.8
 }
 
 global_settings{
