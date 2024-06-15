@@ -107,7 +107,29 @@ Definition taille du trou fenetre // Out
   15
 }
 
+// Panneau
 
+#declare line1 = text{
+    ttf "GapSans" "You know you have been raytracing too long when..." 1, 0
+    translate<0,5.5,2.5>
+    
+     
+}
+
+#declare line2 = text{
+    ttf"GapSans" "...You find yourself wishing you'd paid attention in math class to all those formulae you thought you'd never have any use for in real life." 1,0
+    translate<0,4,2.5> 
+}
+
+#declare line3 = text{
+    ttf "GapSans" "-- Jeff Lee" 1,0
+    translate<0,2.5,2.5>
+   
+}
+
+#declare Ext_pan = box{
+    <-0.5,0,0>, <0.5,8,60>    
+}
 
 
 
@@ -288,7 +310,27 @@ cone { <0,0,10>, 1, <0,0,11.5>, 0.75 finish {F_MetalE}}
   object{O_Base}
   object{O_LavaTube}
 }
+// Paneau
+#declare Texte_a_graver = union{
+    object{line1}
+    object{line2}
+    object{line3}
+}
+
+#declare Text_Final = difference{
+    object{Ext_pan}
+    object{Texte_a_graver}
+}
+
+
 /////POSITIONNEMENT
+
+object{
+    Text_Final
+    pigment{P_Chrome4}
+    rotate <0, 19, 0>
+    translate <-581.5,30,0>
+}
 
 object{TableVerre scale 5}
 
