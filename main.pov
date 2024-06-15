@@ -69,6 +69,7 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
     false,
 )
 }
+
 /* Passage en object pour éviter les erreurs de compilation à cause de la Macro Round_Box */
 #declare B_ext = object{Round_Box (
     <0,0,0>, <5,10,5>,
@@ -84,6 +85,7 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
     false
 )
 }
+
 
 
 
@@ -299,15 +301,7 @@ object{
     O_Plafond
 }
 
-#declare BoiteCarree = object{
-    Boite 
-    scale<1.0, 0.5, 1.0> // <x, y, z>
-}
 
-#declare BoiteLarge = object {
-    Boite 
-    scale<1.7,0.5,1>
-}
 
 object{
     Meuble
