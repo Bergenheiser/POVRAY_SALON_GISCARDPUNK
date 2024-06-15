@@ -28,20 +28,27 @@ light_source { <-15,-15,0> color White}
 
 background {color White}
 
-cone { <0,0,0>, 2, <0,0,2>, 1 finish {F_MetalE}}  
+#declare O_Base = union {
+  cone { <0,0,0>, 2, <0,0,2>, 1 finish {F_MetalE}}  
 difference{
-cone { <0,0,2>, 1, <0,0,4>, 2 finish {F_MetalE}}
-sphere { <0,0,4>, 0.75 texture {T_Ruby_Glass}}
+  cone { <0,0,2>, 1, <0,0,4>, 2 finish {F_MetalE}}
+  sphere { <0,0,4>, 0.75 texture {T_Ruby_Glass}}
 }
 cone { <0,0,10>, 1, <0,0,11.5>, 0.75 finish {F_MetalE}}
+}
 
-union{   
-cone { <0,0,4>, 2, <0,0,10>, 1 texture {T_Ruby_Glass}}
-sphere { <0,0,6>, 1 texture {T_Copper_2B}} 
-cone { <0,0,4>, 1, <0,0,4.5>, 0.5 texture {T_Copper_2B}}                       
-cone { <0,0,6>, 1, <0,0,5.25>, 0.5 texture {T_Copper_2B}}
-cone { <0,0,4>, 0.75, <0,0,5>, 0.5 texture {T_Copper_2B}}
-cone { <0,0,5.5>, 0.75, <0,0,4.75>, 0.5 texture {T_Copper_2B}}
+#declare O_LavaTube = union{   
+  cone { <0,0,4>, 2, <0,0,10>, 1 texture {T_Ruby_Glass}}
+  sphere { <0,0,6>, 1 texture {T_Copper_2B}} 
+  cone { <0,0,4>, 1, <0,0,4.5>, 0.5 texture {T_Copper_2B}}                       
+  cone { <0,0,6>, 1, <0,0,5.25>, 0.5 texture {T_Copper_2B}}
+  cone { <0,0,4>, 0.75, <0,0,5>, 0.5 texture {T_Copper_2B}}
+  cone { <0,0,5.5>, 0.75, <0,0,4.75>, 0.5 texture {T_Copper_2B}}
 }                                                                               
 
-plane { <0,0,-1>, 0.0001 texture {T_Wood8}}
+#declare Lava_Lamp = union {
+  object{O_Base}
+  object{O_LavaTube}
+}
+
+object{Lava_Lamp}
