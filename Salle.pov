@@ -13,18 +13,6 @@ Axe de roation pour les transofromation Y
         }
 }*/
 
-/*
-Définition du sol + plafond 10 cm épaisseur on va faire une intersection avec les murs pour assembler le tout et avoir une continuité
-Car pour le moments les plafond et sol sont plus grands que le contour des murs
-*/ 
-/*#declare F_Sol = box {
-    <-600,-10,-800>,<600,0,600>
-}*/
-
-
-/*#declare F_Plafond = box {
-    <-600,400,-800>,<600,410,600>
-}*/
 
 #declare F_Sol = polygon{
     10, // E A I H C G F B D E

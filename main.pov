@@ -70,21 +70,6 @@ On utilisera cette couche pour faire des fenetres dans notre mur [A REPRENDRE]
 )
 }
 
-/* Passage en object pour éviter les erreurs de compilation à cause de la Macro Round_Box */
-#declare B_ext = object{Round_Box (
-    <0,0,0>, <5,10,5>,
-    0.4, 
-    false,
-)
-}
-
-#declare B_int = object{Round_Box(
-    <0.5,0.7,-1>,
-    <4.5,9.8,6>,
-    0.3,
-    false
-)
-}
 
 
 
@@ -180,34 +165,8 @@ Assemblage des objets pour la scène
     }
 }
 
-#declare Boite = difference
-{
-    object 
-    {
-        B_ext 
-        texture
-        {
-            pigment{rgb 1}
-            finish {
-                    ambient 0.2
-                    diffuse 0.9
-                    specular 0.6
-                    reflection 0.2
-                }
-        }
-        
-    }
-    object {B_int texture{pigment {Orange}}}
-}
 
-#declare Meuble = union {
-object{BoiteLarge scale 10}
-object{BoiteCarree translate<0,5.5,0> scale 10}
-object{Boite translate<-5,0,0> scale y*1.1 scale 10}
-object{BoiteLarge translate<-5,11,0> scale 10}
-object{Boite translate<8.5,0,0> scale 10}
-object{BoiteLarge translate<3.5,11,0> scale 10}
-}
+
 
 
 /*
@@ -301,11 +260,6 @@ object{
     O_Plafond
 }
 
-
-
-object{
-    Meuble
-}
 
 
 //Position réelle
