@@ -351,9 +351,6 @@ object{
 
 
 
-
-
-
 /////////////PARAMETRES D'ENVIRONNEMENT////////////////
 
 cylinder {  // Positive X-axis (red)
@@ -386,16 +383,61 @@ sky_sphere {
     emission rgb <0.5,0.8,0.92>
 }
 
-camera {location <0,300,-700>
+camera { 
+        perspective 
         right x*image_width/image_height
-        look_at <0,250,-600>    
+        up y
+        location <350,260,-550>
+        aperture 0.4 
+        blur_samples 1
+        angle 80
+        focal_point<0,100,0>
+        look_at <0,250,290>
 }
 
-light_source{ 
-    <-100,300,-100>
-    rgb 0.8
+/*
+camera {
+    location <-900,900,0>
+    look_at <-800,400,300>
+}*/
+
+///A MODIFIER CA TAPE TROP HAUT
+light_source {
+    <-650,300,200>
+    color White
+    spotlight
+    radius 60
+    area_light <1, 0, 0>, <0, 0, 1>, 2,2
+    adaptive 1
+    jitter
+    point_at <-100, 0, 0>
 }
+/*
+light_source {
+    <-650,300,200>
+    color White
+    spotlight
+    radius 60
+    area_light <1, 0, 0>, <0, 0, 1>, 2,2
+    adaptive 1
+    jitter
+    point_at <-100, 100, 0>
+}
+// CALCULER COORDS AUTRES LUMIERE
+light_source {
+    <-650,300,200>
+    color White
+    spotlight
+    radius 60
+    area_light <1, 0, 0>, <0, 0, 1>, 2,2
+    adaptive 1
+    jitter
+    point_at <-100, 100, 0>
+}*/
+
+
 
 global_settings{
 assumed_gamma 2.0 
+radiosity{}
 }  
