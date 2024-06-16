@@ -68,6 +68,8 @@ L'importation d'objets de sources externes est autorisée dans la limite de 10% 
 -- Jeff Lee "
 
 3.4.3.4 Sky Sphere
+Texture from : https://wiki.povray.org/content/Reference:Skies.inc
+try to rotate it in order to have some clear régions 
 
 Font
 https://github.com/Interstices-/GapSans
