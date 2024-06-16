@@ -7,6 +7,7 @@
 #include "golds.inc"
 #include "metals.inc"
 #include "stones.inc"
+#include "skies.inc"
 
 
 //VARIABLES
@@ -799,11 +800,16 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
 //////////////////////////////////////////////////////
 
 sky_sphere {
-  pigment {
+  /*pigment {
     rgb<0.5,0.8,0.92>
     scale 130
     translate<0,0,-100>
-    }
+    }*/
+    texture{
+	T_Clouds3
+	scale 130
+	translate<0,0,-100>
+	}
     emission rgb <0.5,0.8,0.95> 
 }
 
