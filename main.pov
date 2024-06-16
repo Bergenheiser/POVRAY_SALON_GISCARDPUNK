@@ -691,8 +691,9 @@ object{BoiteLarge translate<3.5,11,0> scale 10}
 object{
     Text_Final
     pigment{P_Chrome4}
+    scale<3,3,sqrt(9)> // Scale pour voir apparaitre le texte en diagonal sous la fenetre
     rotate <0, 19, 0>
-    translate <-581.5,30,0>
+    translate <-581.5,40,0>
 }
 
 object{
