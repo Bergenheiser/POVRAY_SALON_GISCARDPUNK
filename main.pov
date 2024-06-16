@@ -115,9 +115,7 @@ Definition taille du trou fenetre // Out
 
 #declare line1 = text{
     ttf "./assets/GapSans" "You know you have been raytracing too long when..." 1, 0
-    translate<0,5.5,2.5>
-    
-     
+    translate<0,5.5,2.5>    
 }
 
 #declare line2 = text{
@@ -128,7 +126,6 @@ Definition taille du trou fenetre // Out
 #declare line3 = text{
     ttf "./assets/GapSans" "-- Jeff Lee" 1,0
     translate<0,2.5,2.5>
-   
 }
 
 #declare Ext_pan = box{
@@ -301,6 +298,18 @@ material{
     }
 }
 
+#declare M_Plafond = material {
+	texture{
+	finish{
+		pigment{White}
+		reflection 0
+		ambient 0.1
+		diffuse 0.1
+		specular 0.0001
+	}
+	}
+}
+
 #declare M_Verre_Table = material {
   texture{
     pigment {White*.99+Green*.01 filter 0.999}
@@ -413,7 +422,7 @@ material{
 
 #declare O_Plafond = object{
     F_Plafond
-    material{M_Papier_Peint}
+    material{M_Plafond}
 }
 
 #declare O_Tapis = object{
