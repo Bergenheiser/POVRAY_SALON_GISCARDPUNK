@@ -32,8 +32,8 @@ Fenetre (Max) DONE
 Chaise (Dim) DONE
 Tapis au sol (Dim) WIP
 Murs (Max) DONE
-Texte à placer (Max)
-Skysphere (Max)
+Texte à placer (Max) WIP vérifier si la rotation c'est bien passé car on ne voyait pas le texte sous la fenere (new scale)
+Skysphere (Max) WIP vérifier la texture en rendu final
 Lava Lamp by Graham Barth (importée) https://www.ms.uky.edu/~lee/visual05/gallery/gallery.html
 
 Faire scatter ! RETROUVE LE CODE CONNARD
@@ -69,7 +69,7 @@ L'importation d'objets de sources externes est autorisée dans la limite de 10% 
 
 3.4.3.4 Sky Sphere
 Texture from : https://wiki.povray.org/content/Reference:Skies.inc
-try to rotate it in order to have some clear régions 
+try to rotate it in order to have some clear zone
 
 Font
 https://github.com/Interstices-/GapSans
