@@ -134,6 +134,22 @@ Definition taille du trou fenetre // Out
 
 
 
+//Meuble
+#declare F_Ext_Meuble = Round_Box (
+    <0,0,0>, <5,10,5>
+    0.4, 
+    false,
+)
+#declare F_Int_Meuble = Round_Box(
+    <0.5,0.7,-1>,
+    <4.5,9.8,6>,
+    0.3,
+    false
+)
+
+
+
+
 
 
 
@@ -209,6 +225,23 @@ material{
 }
 
 
+//Meuble
+#declare M_Ext_Meuble = material
+{texture
+        {
+            pigment{rgb 0.9}
+            finish {
+                    ambient 0.2
+                    diffuse 0.7
+                    specular 0.6
+                    reflection 0.2
+                }
+        }
+}
+
+#declare M_Int_Meuble = material{texture{pigment {Orange}}}
+
+
 /////////////HABILLAGE///////////////////
 ///////////////////////////////////////////
 
@@ -253,7 +286,6 @@ material{
   material{M_Verre_Table}
 }
 
-
 ////CSG ET TRANSFORMATIONS
 #declare O_Mur_Creus = difference
 {
@@ -286,6 +318,8 @@ object{O_GT_Leg translate <14,0,-14>}
 object{O_GT_Leg translate <14,0,14>}
 }
 
+
+
 ///LAVA LAMP
 #declare O_Base = union {
   cone { <0,0,0>, 2, <0,0,2>, 1 finish {F_MetalE}}  
@@ -309,7 +343,7 @@ cone { <0,0,10>, 1, <0,0,11.5>, 0.75 finish {F_MetalE}}
   object{O_Base}
   object{O_LavaTube}
 }
-// Paneau
+//Panneau
 #declare Texte_a_graver = union{
     object{line1}
     object{line2}
@@ -321,6 +355,29 @@ cone { <0,0,10>, 1, <0,0,11.5>, 0.75 finish {F_MetalE}}
     object{Texte_a_graver}
 }
 
+//Meuble
+#declare Boite = difference
+{
+    object {F_Ext_Meuble material{M_Ext_Meuble}}
+    object {F_Int_Meuble material{M_Int_Meuble}}
+}
+
+#declare BoiteCarree = object{
+    Boite scale <1.0, 0.5, 1.0>
+}
+#declare BoiteLarge = object {
+    Boite scale <1.7,0.5,1>
+}
+
+#declare Meuble = union {
+object{BoiteLarge scale 10}
+object{BoiteCarree translate<0,5.5,0> scale 10}
+object{Boite translate<-5,0,0> scale y*1.1 scale 10}
+object{BoiteLarge translate<-5,11,0> scale 10}
+object{Boite translate<8.5,0,0> scale 11}
+object{BoiteLarge translate<3.5,11,0> scale 10}
+}
+
 
 /////POSITIONNEMENT
 
@@ -330,10 +387,6 @@ object{
     rotate <0, 19, 0>
     translate <-581.5,30,0>
 }
-
-object{TableVerre scale 5}
-
-object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
 
 object{
     Mur_Fenetre // Remplacer par mur avec fenetre une fois l'objet final crée
@@ -417,11 +470,17 @@ object{
     O_Plafond
 }
 
+
+
+//object{TableVerre scale 5}
+
+object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
+
 object{F_Scatter_Box translate <-300,250,500>}
 
-object{Lava_Lamp scale 4 rotate x*-90 translate<0,120,0>}
+//object{Lava_Lamp scale 4 rotate x*-90 translate<0,120,0>}
 
-
+object{Meuble scale 1.2 rotate y*70 translate <470,1,100>} //rotate y*-30 translate <250,1,300>}
 
 
 
@@ -462,26 +521,27 @@ light_source {
     radius 75
     adaptive 1
     jitter
-    point_at <0, -80, 0>
+    point_at <0, -80, 100>
 } //POSITION VALIDEE
 
-light_source { <0, 125, 0>, 0.5 media_interaction off }
+
 
 // CALCULER COORDS AUTRES LUMIERE
-/*light_source {
+light_source {
     <-650,300,200>
     color White
     spotlight
     radius 60
-    area_light <1, 0, 0>, <0, 0, 1>, 2,2
     adaptive 1
     jitter
-    point_at <-100, 100, 0>
+    point_at <-100, 0, 0>
 }
-*/
+
 
 
 global_settings{
+    ambient_light rgb<1, 1, 1>
+ //Pour le positionnement à retirer en prod.
 assumed_gamma 2.0 
-radiosity{}
+//radiosity{}
 }  
