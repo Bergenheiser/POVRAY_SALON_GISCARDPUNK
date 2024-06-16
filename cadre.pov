@@ -3,7 +3,7 @@
 
 global_settings {
     assumed_gamma 2.0
-    ambient_light <1, 1, 1> // <red, green, blue}
+    ambient_light <1, 1, 1>
 }
 
 #declare FrameThickness = 0.3;
@@ -35,7 +35,6 @@ light_source {
     color rgb <1, 1, 1>
 }
 
-// Wood texture for the frame
 #declare WoodTexture = texture {
     pigment { wood color_map {
         [0.5 color rgb <0.6, 0.3, 0.1>]
@@ -45,7 +44,6 @@ light_source {
     normal { bumps 0.5 scale 0.02 }
 }
 
-// Image texture
 #declare ImageTexture = material{ 
     texture{ 
     pigment
@@ -61,15 +59,13 @@ light_source {
     finish{ambient 0.1 diffuse 0.9 specular 0.5 roughness 0.03} 
     }
 }
-// Outer frame with rounded edges
+
 #declare FrameOuter = difference {
 
-    // Main box of the frame
     box {
             <-FrameSize, -FrameSize, -FrameDepth>, <FrameSize, FrameSize, FrameDepth>
             texture { WoodTexture }
         }
-    // Cut out the inner part of the frame
     box {
         <-FrameSize + FrameThickness, -FrameSize + FrameThickness, -FrameDepth - 0.1>,
         <FrameSize - FrameThickness, FrameSize - FrameThickness, FrameDepth + 0.1>
@@ -82,7 +78,7 @@ light_source {
     material{ImageTexture}
     translate<-FrameSize + FrameThickness + 0.01, -FrameSize + FrameThickness + 0.01, -FrameDepth + 0.01>
 }
-// Image plane
+
 #declare ImagePlane = box {
     <-FrameSize + FrameThickness + 0.01, -FrameSize + FrameThickness + 0.01, -FrameDepth + 0.01>,
     <FrameSize - FrameThickness - 0.01, FrameSize - FrameThickness - 0.01, -FrameDepth + 0.02>
