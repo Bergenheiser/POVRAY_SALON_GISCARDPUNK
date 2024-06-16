@@ -9,7 +9,10 @@
 #include "stones.inc"
 
 
-
+//VARIABLES
+#declare EpaisseurCadre = 0.3;
+#declare ProfondeurCadre = 0.1;
+#declare TailleCadre = 5;
 
 ////////FORMES ELEMENTAIRES/////////////////
 ////////////////////////////////////////////
@@ -354,8 +357,37 @@ material{
         scale 0.5
         }
         normal{quilted 1 turbulence 0.01 scale 0.1*<1,1,1> rotate z*45}
-        finish{ambient 0.001 diffuse 0.5 specular 0.04 roughness 0.1}
+        finish{diffuse 0.3 specular 0.04 roughness 0.1}
         scale 0.5
+}
+
+//PHOTO
+#declare TextureBois = material{
+    texture {
+    pigment { wood color_map {
+        [0.5 color rgb <0.6, 0.3, 0.1>]
+        [0.7 color rgb <0.8, 0.5, 0.3>]
+    }}
+    finish { ambient 0.2 diffuse 0.6 }
+    normal { bumps 0.5 scale 0.02 }
+}
+}
+
+#declare TextureImage = material{ 
+    texture{ 
+    pigment
+    { 
+        image_map
+        { 
+            png "./assets/easter_egg.png"
+        }
+        scale 10
+        translate<5,5,0>
+        
+    }
+    finish{ specular 0.04 roughness 0.3} 
+    }
+    interior{ior 0}
 }
 
 /////////////HABILLAGE///////////////////
@@ -628,7 +660,33 @@ object{BoiteLarge translate<3.5,11,0> scale 10}
         }
 }
 
-/////POSITIONNEMENT
+//Photo
+#declare O_Cadre = difference {
+
+    box {
+            <-TailleCadre, -TailleCadre, -ProfondeurCadre>, <TailleCadre, TailleCadre, ProfondeurCadre>
+            material { TextureBois }
+        }
+    box {
+        <-TailleCadre + EpaisseurCadre, -TailleCadre + EpaisseurCadre, -ProfondeurCadre - 0.1>,
+        <TailleCadre - EpaisseurCadre, TailleCadre - EpaisseurCadre, ProfondeurCadre + 0.1>
+    }
+}
+
+#declare O_Plane_Image = box {
+    <-TailleCadre + EpaisseurCadre + 0.01, -TailleCadre + EpaisseurCadre + 0.01, -ProfondeurCadre + 0.01>,
+    <TailleCadre - EpaisseurCadre - 0.01, TailleCadre - EpaisseurCadre - 0.01, -ProfondeurCadre + 0.02>
+    material{TextureImage}
+}
+#declare CadrePhoto = union {
+    object {O_Cadre}
+    object {O_Plane_Image}
+    
+}
+
+
+/////POSITIONNEMENT/////////////
+//////////////////////////////////
 
 object{
     Text_Final
@@ -733,8 +791,11 @@ object{Meuble scale 1.2 rotate y*70 translate <470,0,100>} //rotate y*-30 transl
 
 object{Chaise rotate y*60 scale 110 translate<130,0,75>}
 
+object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shadow}
+
 
 /////////////PARAMETRES D'ENVIRONNEMENT////////////////
+//////////////////////////////////////////////////////
 
 sky_sphere {
   pigment {
