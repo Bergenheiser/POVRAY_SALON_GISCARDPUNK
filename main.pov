@@ -300,8 +300,8 @@ material{
 
 #declare M_Plafond = material {
 	texture{
-	finish{
 		pigment{White}
+	finish{
 		reflection 0
 		ambient 0.1
 		diffuse 0.1
@@ -808,19 +808,39 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
 /////////////PARAMETRES D'ENVIRONNEMENT////////////////
 //////////////////////////////////////////////////////
 
-sky_sphere {
-  /*pigment {
-    rgb<0.5,0.8,0.92>
-    scale 130
-    translate<0,0,-100>
-    }*/
-    texture{
-	T_Clouds3
-	scale 130
-	translate<0,0,-100>
-	}
+  sky_sphere {
+    pigment {
+      gradient y
+      color_map {
+        [0.000 0.002 color rgb <1.0, 0.2, 0.0>
+                     color rgb <1.0, 0.2, 0.0>]
+        [0.002 0.200 color rgb <0.8, 0.1, 0.0>
+                     color rgb <0.2, 0.2, 0.3>]
+      }
+      scale 2
+      translate -1
+    }
+    pigment {
+      bozo
+      turbulence 0.65
+      octaves 6
+      omega 0.7
+      lambda 2
+      color_map {
+          [0.0 0.1 color rgb <0.85, 0.85, 0.85>
+                   color rgb <0.75, 0.75, 0.75>]
+          [0.1 0.5 color rgb <0.75, 0.75, 0.75>
+                   color rgbt <1, 1, 1, 1>]
+          [0.5 1.0 color rgbt <1, 1, 1, 1>
+                   color rgbt <1, 1, 1, 1>]
+      }
+      scale <0.2, 0.5, 0.2>
+    }
+    scale 0.1
+    rotate -120*x
     emission rgb <0.5,0.8,0.95> 
-}
+  }
+
 
 camera { 
         perspective 
