@@ -817,7 +817,7 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
         [0.002 0.200 color rgb <0.8, 0.1, 0.0>
                      color rgb <0.2, 0.2, 0.3>]
       }
-      scale 2
+      scale 10
       translate -1
     }
     pigment {
@@ -836,8 +836,8 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
       }
       scale <0.2, 0.5, 0.2>
     }
-    scale 0.1
-    rotate -120*x
+    scale 0.09
+    rotate -70*x
     emission rgb <0.5,0.8,0.95> 
   }
 
@@ -847,18 +847,13 @@ camera {
         right x*image_width/image_height
         up y
         location <350,260,-550>
-        /*aperture 0.4 
+        aperture 0.4 
         blur_samples 1
         angle 80
-        focal_point<0,100,0>*/
+        focal_point<0,100,0>
         look_at <0,250,290>
 }
 
-
-/*camera {
-    location <-100,700,900>
-    look_at <-150,400,600>
-}*/
 
 light_source {
     <-140,350,600>
