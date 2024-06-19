@@ -119,23 +119,18 @@ Definition taille du trou fenetre // Out
 }
 
 #declare line2 = text{
-    ttf"./assets/GapSans" "...You find yourself wishing you'd paid attention in math class" 1,0
+    ttf"./assets/GapSans" "...You find yourself wishing you'd paid attention in math class to all those formulae you thought" 1,0
     translate<0,5.5,2.5> 
 }
 
 #declare line3 = text{
-    ttf "./assets/GapSans" "to all those formulae you thought" 1,0
+    ttf "./assets/GapSans" " you'd never have any use for in real life." 1,0
     translate<0,4,2.5>
 }
 
 #declare line4 = text{
-    ttf "./assets/GapSans" "you'd never have any use for in real life." 1,0
-    translate<0,2.5,2.5>
-}
-
-#declare line5 = text{
     ttf "./assets/GapSans" "-- Jeff Lee" 1,0
-    translate<0,1,2.5>
+    translate<0,2.5,2.5>
 }
 
 #declare Ext_pan = box{
@@ -523,7 +518,6 @@ cone { <0,0,10>, 1, <0,0,11.5>, 0.75 finish {F_MetalE}}
     object{line2}
     object{line3}
     object{line4}
-    object{line5}
 }
 
 
@@ -717,8 +711,8 @@ object{BoiteLarge translate<3.5,11,0> scale 10}
 
 object{
     Texte_a_graver
-    scale<-12.5,12.5,0.7>
-    rotate<0,109,0>
+    scale<-8.1,10,0.7>
+    rotate<0,109.5,0>
     translate<-592.5,0,0>
     no_shadow
                      // Scale pour voir apparaitre le texte en diagonal sous la fenetre
@@ -836,7 +830,7 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
         [0.002 0.200 color rgb <0.8, 0.1, 0.0>
                      color rgb <0.2, 0.2, 0.3>]
       }
-      scale 10
+      scale 2
       translate -1
     }
     pigment {
@@ -855,8 +849,8 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
       }
       scale <0.2, 0.5, 0.2>
     }
-    scale 0.09
-    rotate -70*x
+    scale 0.1
+    rotate -120*x
     emission rgb <0.5,0.8,0.95> 
   }
 
@@ -866,13 +860,18 @@ camera {
         right x*image_width/image_height
         up y
         location <350,260,-550>
-        aperture 0.4 
+        /*aperture 0.4 
         blur_samples 1
         angle 80
-        focal_point<0,100,0>
+        focal_point<0,100,0>*/
         look_at <0,250,290>
 }
 
+
+/*camera {
+    location <-100,700,900>
+    look_at <-150,400,600>
+}*/
 
 light_source {
     <-140,350,600>
