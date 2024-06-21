@@ -858,7 +858,7 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
     scale 0.09
     rotate -70*x
     emission rgb <0.5,0.8,0.95> 
-  }
+}
 
 
 camera { 
