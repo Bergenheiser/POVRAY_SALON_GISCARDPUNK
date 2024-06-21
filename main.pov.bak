@@ -662,9 +662,8 @@ camera {
         up y
         location <350,260,-550>
         angle 80
-        aperture 5.0
-        blur_samples 2
-        focal_point<0,150,0>
+        aperture 0.4 
+        blur_samples 4
         look_at <0,250,290>
 }
 
