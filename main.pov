@@ -8,6 +8,7 @@
 #include "metals.inc"
 #include "stones.inc"
 #include "skies.inc"
+#include "rad_def.inc"
 
 //Import local
 #include "./chaise.inc"
@@ -164,11 +165,10 @@ material{
     texture{
         pigment{ color transmit 0.9}
             finish { 
-                reflection 0.01
-                specular 0.04
+                reflection 0.04
+                specular 0.03
                 roughness 0.03
-                phong 0.75
-                phong_size 150}        
+                }        
    }
    interior{ior 1.4}
 } 
@@ -201,7 +201,7 @@ material{
             specular 0.01
             diffuse 0.4
             reflection { 0.01, 0.04 }
-            roughness 0.05 //TEST GRADIENT DE REFLECTION
+            roughness 0.05
         }
     }
 }
@@ -361,6 +361,7 @@ object{O_GT_Leg translate<-10,0,-10>}
 object{O_GT_Leg translate<-10,0,10>}
 object{O_GT_Leg translate <14,0,-14>}
 object{O_GT_Leg translate <14,0,10>}
+split_union off
 }
 
 ///LAVA LAMP
@@ -374,18 +375,27 @@ cone { <0,0,10>, 1, <0,0,11.5>, 0.75 finish {F_MetalE}}
 }
 
 #declare O_LavaTube = union{   
-  cone { <0,0,4>, 2, <0,0,10>, 1 texture {T_Ruby_Glass}}
+  cone { <0,0,4>, 2, <0,0,10>, 1 texture {M_Verre}}
   sphere { <0,0,6>, 1 texture {T_Copper_2B}} 
   cone { <0,0,4>, 1, <0,0,4.5>, 0.5 texture {T_Copper_2B}}                       
   cone { <0,0,6>, 1, <0,0,5.25>, 0.5 texture {T_Copper_2B}}
   cone { <0,0,4>, 0.75, <0,0,5>, 0.5 texture {T_Copper_2B}}
   cone { <0,0,5.5>, 0.75, <0,0,4.75>, 0.5 texture {T_Copper_2B}}
+  material {texture{finish {ambient .8 diffuse .6}}}
+  split_union off
 }
 
 #declare Lava_Lamp = union {
   object{O_Base}
   object{O_LavaTube}
 }
+
+#declare Lava_Light = object{ 
+    Lava_Lamp
+    scale 4 
+    rotate x*-90
+}
+
 
 //Panneau
 #declare Texte_a_graver = union{
@@ -417,6 +427,7 @@ object{Boite translate<-5,0,0> scale y*1.1 scale 10}
 object{BoiteLarge translate<-5,11,0> scale 10}
 object{Boite translate<8.5,0,0> scale 11}
 object{BoiteLarge translate<3.5,11,0> scale 10}
+split_union off //permets de raytrace la structure entiere au lieu de ses sous-parties individuelles
 }
 
 
@@ -538,21 +549,36 @@ object{
 
 object{TableVerre scale 5 translate<0,-5,0>}
 
-object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
+object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>
+ photons{
+                target
+                reflection on
+                refraction off
+            }}
 
-object{F_Scatter_Box translate <-300,250,500>}
+object{Meuble scale 1.2 rotate y*70 translate <470,0,100>
+ photons{
+                target
+                reflection on
+                refraction on
+            }
+ }
 
-object{Lava_Lamp scale 4 rotate x*-90 translate<0,120,0>}
-
-object{Meuble scale 1.2 rotate y*70 translate <470,0,100>}
-
-object{Chaise rotate y*60 scale 110 translate<130,0,75>}
+object{Chaise rotate y*60 scale 110 translate<130,0,75>
+ photons{
+                target
+                reflection on
+                refraction on
+            }
+}
 
 object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shadow}
 
 
 /////////////PARAMETRES D'ENVIRONNEMENT////////////////
 //////////////////////////////////////////////////////
+#declare dawn =rgb<0.49,0.32,0.19>; 
+//49% red, 32% green and 19% 
 
 sky_sphere {
     pigment {
@@ -587,41 +613,60 @@ sky_sphere {
     emission rgb <0.5,0.8,0.95> 
 }
 
+light_source{
+    <0,120,0>
+    color White
+    looks_like { Lava_Light } 
+    fade_distance 250
+    fade_power 1
+
+}
+
+light_source {
+    <-140,350,600>
+    color dawn
+    spotlight
+    radius 75
+    adaptive 1
+    jitter
+    point_at <0, -80, 100>
+     photons{
+                reflection on
+                refraction on
+            }
+}
+
+light_source {
+    <-650,300,200>
+    color dawn
+    spotlight
+    radius 60
+    adaptive 1
+    jitter
+    point_at <-100, 0, 0>
+    photons{
+                reflection on
+                refraction on
+            }
+}
 
 camera { 
         perspective 
         right x*image_width/image_height
         up y
         location <350,260,-550>
-        aperture 0.4 
-        blur_samples 1
         angle 80
-        focal_point<0,100,0>
+        aperture 2 
+        blur_samples 2
+        focal_point<0,150,0>
         look_at <0,250,290>
-}
-
-
-light_source {
-    <-140,350,600>
-    color White
-    spotlight
-    radius 75
-    adaptive 1
-    jitter
-    point_at <0, -80, 100>
-}
-
-light_source {
-    <-650,300,200>
-    color White
-    spotlight
-    radius 60
-    adaptive 1
-    jitter
-    point_at <-100, 0, 0>
 }
 
 global_settings{
 assumed_gamma 2.0 
-//radiosity{}
+radiosity{Rad_Settings(Radiosity_OutdoorLight,off,off)}
+photons {
+    count 10000
+    media 100
+    }
 }  
