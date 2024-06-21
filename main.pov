@@ -79,7 +79,6 @@ Definition taille du trou fenetre // Out
 
 
 //TABLE
-
 #declare F_Pied_Table = lathe {
   cubic_spline
   9, 
@@ -112,7 +111,6 @@ Definition taille du trou fenetre // Out
 }
 
 // Panneau
-
 #declare line1 = text{
     ttf "./assets/GapSans" "You know you have been raytracing too long when..." 1, 0
     translate<0,7,2.5>    
@@ -142,9 +140,6 @@ Definition taille du trou fenetre // Out
     <-0.5,0,0>, <0.5,10,60>    
 }
 
-
-
-
 //Meuble
 #declare F_Ext_Meuble = Round_Box (
     <0,0,0>, <5,10,5>
@@ -157,8 +152,6 @@ Definition taille du trou fenetre // Out
     0.3,
     false
 )
-
-
 
 //Chaise (le code ci-joint n'est pas organiquement sourcé, il est le produit de l'admiration des travaux de la communauté POVRAY) 
 //Cependant, l'esthetique est entierement produit de notre direction artistique
@@ -252,9 +245,6 @@ Definition taille du trou fenetre // Out
         plane{z,0 inverse}
         scale <xChair*0.5,rLegChair,rLegChair*1>
 }
-
-
-
 
 
 /////////////////MATERIAUX////////////////////////
@@ -709,12 +699,8 @@ object{BoiteLarge translate<3.5,11,0> scale 10}
     
 }
 
-
 /////POSITIONNEMENT/////////////
 //////////////////////////////////
-
-
-
 object{
     Texte_a_graver
     scale<-12.5,12.5,0.7>
@@ -807,8 +793,6 @@ object{
     O_Plafond
 }
 
-
-
 object{TableVerre scale 5 translate<0,-5,0>}
 
 object{O_Tapis scale <600,600,1> rotate x*90 translate <-300,1,-300>}
@@ -882,11 +866,8 @@ light_source {
     adaptive 1
     jitter
     point_at <0, -80, 100>
-} //POSITION VALIDEE
+}
 
-
-
-// CALCULER COORDS AUTRES LUMIERE
 light_source {
     <-650,300,200>
     color White
@@ -897,11 +878,7 @@ light_source {
     point_at <-100, 0, 0>
 }
 
-
-
 global_settings{
-    ambient_light rgb<1, 1, 1>
- //Pour le positionnement à retirer en prod.
 assumed_gamma 2.0 
 //radiosity{}
 }  
