@@ -587,7 +587,7 @@ object{CadrePhoto scale 8 rotate y*40 translate<210,250+TailleCadre,505> no_shad
 
 sky_sphere {
     pigment {
-      gradient y
+      gradient y                                                                                                           
       color_map {
         [0.000 0.002 color rgb <1.0, 0.2, 0.0>
                      color rgb <1.0, 0.2, 0.0>]
